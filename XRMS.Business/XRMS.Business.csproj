@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1676F7AF-489F-459A-88E6-7B7F5CF151B3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>XRMS.Business</RootNamespace>
+    <AssemblyName>XRMS.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Cinch.WPF">
+      <HintPath>..\Assemblies\Cinch.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Csla">
+      <HintPath>..\..\..\..\..\SoftwareDevelopment\Platforms\DotNet\WPF\SampleProject\1. MVVM Framework\csla-4.6.500\Bin\Debug\NET4\Csla.dll</HintPath>
+    </Reference>
+    <Reference Include="Csla.CustomFieldData">
+      <HintPath>..\Assemblies\Csla.CustomFieldData.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MEFedMVVM.WPF">
+      <HintPath>..\Assemblies\MEFedMVVM.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Area.cs" />
+    <Compile Include="Models\Material.cs" />
+    <Compile Include="Models\MaterialGroup.cs" />
+    <Compile Include="Models\MaterialLog.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductGroup.cs" />
+    <Compile Include="Models\RecipeItem.cs" />
+    <Compile Include="Models\ReportEvent.cs" />
+    <Compile Include="Models\ReportMaterial.cs" />
+    <Compile Include="Models\ReportOrder.cs" />
+    <Compile Include="Models\ReportOrderEdition.cs" />
+    <Compile Include="Models\ReportOrderItem.cs" />
+    <Compile Include="Models\ReportOrderItemEdition.cs" />
+    <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\Unit.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\AreaRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\MaterialGroupRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\MaterialRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\OrderItemRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\OrderRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\ProductGroupRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\ProductRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\RecipeItemRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\ReportEventRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\ReportMaterialRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\ReportOrderEditionRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\ReportOrderItemEditionRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\ReportOrderItemRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\ReportOrderRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\RestaurantRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\UnitRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\UserRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\UserRoleRepository.cs" />
+    <Compile Include="Repositories\DomainModel\GenericDomainRepository.cs" />
+    <Compile Include="Repositories\DomainModel\GenericIdBaseObjectRepository.cs" />
+    <Compile Include="Repositories\DomainModel\IRepository.cs" />
+    <Compile Include="Repositories\DomainModel\FromEF\TableRepository.cs" />
+    <Compile Include="Repositories\EFRepository.cs" />
+    <Compile Include="Repositories\EntityModel\GenericEntityRepository.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\IRepositoryProvider.cs" />
+    <Compile Include="Repositories\ObjectMappingHelper.cs" />
+    <Compile Include="Services\Implementations\AreaManager.cs" />
+    <Compile Include="Services\Implementations\GlobalDataManager.cs" />
+    <Compile Include="Services\Implementations\MaterialGroupManager.cs" />
+    <Compile Include="Services\Implementations\MaterialManager.cs" />
+    <Compile Include="Services\Implementations\OrderManager.cs" />
+    <Compile Include="Services\Implementations\ProductGroupManager.cs" />
+    <Compile Include="Services\Implementations\ProductManager.cs" />
+    <Compile Include="Services\Implementations\RecipeItemManager.cs" />
+    <Compile Include="Services\Implementations\ReportOrderItemEditionManager.cs" />
+    <Compile Include="Services\Implementations\UnitManager.cs" />
+    <Compile Include="Services\Implementations\GenericManager.cs" />
+    <Compile Include="Services\Implementations\UserManager.cs" />
+    <Compile Include="UnitOfWorks\IUnitOfWork.cs" />
+    <Compile Include="Repositories\RepositoryFactories.cs" />
+    <Compile Include="Repositories\EntityModel\FromEF\IRepository.cs" />
+    <Compile Include="Repositories\EntityModel\FromEF\TableRepository.cs" />
+    <Compile Include="Models\Table.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\RepositoryProvider.cs" />
+    <Compile Include="UnitOfWorks\UnitOfWork.cs" />
+    <Compile Include="Services\Implementations\TableManager.cs" />
+    <Compile Include="Services\Interfaces\IManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Repositories\EntityModel\FromSQL\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XRMS.Data\XRMS.Data.csproj">
+      <Project>{4d66bef4-36e3-4e1a-8a6b-1ef9c197af18}</Project>
+      <Name>XRMS.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\XRMS.Libraries\XRMS.Libraries.csproj">
+      <Project>{f79362d6-1706-411b-a290-099d3460ee58}</Project>
+      <Name>XRMS.Libraries</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

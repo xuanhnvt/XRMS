@@ -1,0 +1,118 @@
+﻿<Window x:Class="XRMS.Presentation.Popups.ProductGroupPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XRMS.Presentation.Popups"
+        mc:Ignorable="d"
+        xmlns:Cinch="clr-namespace:Cinch;assembly=Cinch.WPF"
+        WindowStartupLocation="CenterOwner"
+        Title="Product Group View" Height="360" Width="400"
+        Background="{DynamicResource PageBackgroundBrush}"
+        Foreground="{DynamicResource PageForegroundBrush}"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              Background="{DynamicResource PageBackgroundBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"
+                        Background="{DynamicResource PageHeaderPanelBackgroundBrush}">
+                <!--Image Source="../Images/Area.png"
+                       Margin="10,0,0,0"
+                       Width="36" Height="36"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/-->
+                <Label Content="{Binding DisplayName}"
+                       Margin="10,0,0,0"
+                       Style="{DynamicResource LabelPageHeaderStyle}"/>
+            </StackPanel>
+
+            <!--Rectangle Grid.Row="1"
+                       Height="2"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                       Fill="{DynamicResource PageForegroundBrush}"/-->
+        </Grid>
+
+        <GroupBox Grid.Row="1" Margin="20,0,20,5" Width="Auto" Height="Auto">
+            <GroupBox.Header>
+                <Label Content="Product Group"/>
+            </GroupBox.Header>
+
+            <Grid Margin="10,10,10,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="6" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+
+                <!-- Code -->
+                <Label Grid.Row="0" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Code: "/>
+                <TextBox Grid.Row="0" Grid.Column="2"
+                         x:Name="CodeBox"
+                         Text="{Binding Path=Item.Code, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="{Binding ElementName=CodeBox, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+
+                <!-- Name -->
+                <Label Grid.Row="2" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Name: "/>
+                <TextBox Grid.Row="2" Grid.Column="2"
+                         x:Name="NameBox"
+                         Text="{Binding Path=Item.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="{Binding ElementName=NameBox, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+
+                <!-- Description -->
+                <Label Grid.Row="4" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Description: "/>
+                <TextBox Grid.Row="4" Grid.Column="2"
+                         x:Name="DescriptionBox"
+                         Text="{Binding Path=Item.Description, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="{Binding ElementName=DescriptionBox, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+            </Grid>
+        </GroupBox>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button Content="Save"
+                    Margin="0,5,0,5" Width="90" Height="30"
+                    Command="{Binding SaveCommand}"/>
+            <Button Content="Cancel"
+                    Margin="10,5,0,5" Width="90" Height="30"
+                    Command="{Binding CancelCommand}"/>
+        </StackPanel>
+    </Grid>
+</Window>

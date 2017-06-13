@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+   
+    <!-- This is the style for the list of photos on the PersonInfo control -->
+    <Style x:Key="PhotosListStyle" TargetType="{x:Type ListBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" Margin="5,5,5,5">
+                        <WrapPanel IsItemsHost="True" VerticalAlignment="Top" />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- This is the style for the photo containers in the list of photos on the PersonInfo control -->
+    <Style x:Key="PhotosListItemStyle" TargetType="{x:Type ListBoxItem}">
+        <Setter Property="Margin" Value="0,0,10,10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                    <Grid SnapsToDevicePixels="true">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" />
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <!-- Change IsSelected background to set the selection color for the photos -->
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter Property="Background" Value="#FFFFFF" TargetName="Border" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- This is the style for the list of tags on the Person Info control -->
+    <Style x:Key="TagsListStyle" TargetType="{x:Type ListBox}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListBox}">
+                    <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Disabled" Margin="5,5,5,5">
+                        <WrapPanel IsItemsHost="True" />
+                    </ScrollViewer>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>

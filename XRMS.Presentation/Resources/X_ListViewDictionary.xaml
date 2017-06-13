@@ -1,0 +1,84 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- list view details -->
+    <Style x:Key="RestaurantListViewStyle" TargetType="ListView">
+        <Setter Property="Height" Value="Auto"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+        <Setter Property="VirtualizingStackPanel.IsVirtualizing" Value="True"/>
+        <Setter Property="IsSynchronizedWithCurrentItem" Value="True"/>
+        <Setter Property="SelectionMode" Value="Single"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListView">
+                    <Border x:Name="ListViewBorder" Style="{DynamicResource PanelBorderStyle}">
+                        <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="RestaurantListViewItemTemplate" TargetType='{x:Type ListViewItem}'>
+        <Grid SnapsToDevicePixels="True" Margin="0,3,0,0">
+            <Border x:Name="ListViewItemBorder" Style="{DynamicResource ControlBorderStyle}" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <GridViewRowPresenter TextBlock.Foreground="{TemplateBinding Foreground}" TextBlock.FontSize="16" TextBlock.FontFamily="Arial" Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!-- Change IsSelected SelectedBackgroundBrush to set the selection color for the items -->
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{DynamicResource MouseOverBackgroundBrush}" TargetName="ListViewItemBorder"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource MouseOverBorderBrush}" TargetName="ListViewItemBorder"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter Property="Background" Value="{DynamicResource SelectedBackgroundBrush}" TargetName="ListViewItemBorder"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SelectedBorderBrush}" TargetName="ListViewItemBorder"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="RestaurantSmallListViewItemTemplate" TargetType='{x:Type ListViewItem}'>
+        <Grid SnapsToDevicePixels="True" Margin="0,3,0,0">
+            <Border x:Name="ListViewItemBorder" Style="{DynamicResource ControlBorderStyle}" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            <GridViewRowPresenter TextBlock.Foreground="{TemplateBinding Foreground}" TextBlock.FontSize="12" TextBlock.FontFamily="Arial" Content="{TemplateBinding Content}" Columns="{TemplateBinding GridView.ColumnCollection}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <!-- Change IsSelected SelectedBackgroundBrush to set the selection color for the items -->
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{DynamicResource MouseOverBackgroundBrush}" TargetName="ListViewItemBorder"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource MouseOverBorderBrush}" TargetName="ListViewItemBorder"/>
+            </Trigger>
+            <Trigger Property="IsSelected" Value="true">
+                <Setter Property="Background" Value="{DynamicResource SelectedBackgroundBrush}" TargetName="ListViewItemBorder"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource SelectedBorderBrush}" TargetName="ListViewItemBorder"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="RestaurantListViewItemStyle" TargetType="{x:Type ListViewItem}">
+        <Setter Property="Template" Value="{DynamicResource RestaurantListViewItemTemplate}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+        <!--Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Header="Menu item 1" />
+                    <MenuItem Header="Menu item 2" />
+                    <Separator />
+                    <MenuItem Header="Menu item 3" />
+                </ContextMenu>
+            </Setter.Value>
+        </Setter-->
+    </Style>
+
+    <Style x:Key="RestaurantSmallListViewItemStyle" TargetType="{x:Type ListViewItem}" >
+        <Setter Property="Template" Value="{DynamicResource RestaurantSmallListViewItemTemplate}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+    </Style>
+
+</ResourceDictionary>

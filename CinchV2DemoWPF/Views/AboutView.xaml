@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="CinchV2DemoWPF.AboutView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:CinchV2="clr-namespace:Cinch;assembly=Cinch.WPF"
+             xmlns:meffed="http:\\www.codeplex.com\MEFedMVVM"
+			 xmlns:local="clr-namespace:CinchV2DemoWPF;assembly="
+			 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"             
+             mc:Ignorable="d" 
+             d:DesignHeight="371" d:DesignWidth="533"
+             meffed:ViewModelLocator.ViewModel="AboutViewModel">
+
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <FlowDocumentPageViewer Grid.Column="0"  Margin="0,0,0,20" Background="White" Zoom="120" >
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Binding TitleContents}" FontFamily="Impact" FontSize="20" Foreground="#FFFF6A00" />
+                </Paragraph>
+				<Paragraph>
+                    <Run Text="{Binding BodyContents}" FontFamily="Tahoma" FontSize="11" />
+                </Paragraph>
+            </FlowDocument>
+        </FlowDocumentPageViewer>
+
+        <Grid Grid.Column="1" Background="{StaticResource mainGridBrush}">
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="30">
+                <Label Style="{StaticResource aboutLabelStyle}"  
+		 				Content="Check Out Cinch:"/>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Style="{StaticResource aboutTextBlockStyleLinks}" 
+                                   Text="Home Page [At Codeplex]">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <CinchV2:EventToCommandTrigger 
+                                     Command="{Binding AboutViewEventToVMFiredCommand}" 
+                                     CommandParameter="Home"/>
+                            </i:EventTrigger>                        
+                        </i:Interaction.Triggers>                    
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource aboutTextBlockStyleLinks}" 
+                                   Text="Source Code [At Codeplex]">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown">
+                                <CinchV2:EventToCommandTrigger 
+                                     Command="{Binding AboutViewEventToVMFiredCommand}" 
+                                     CommandParameter="Source"/>
+                            </i:EventTrigger>                        
+                        </i:Interaction.Triggers>
+                    </TextBlock>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+		
+
+    </Grid>
+
+
+</UserControl>

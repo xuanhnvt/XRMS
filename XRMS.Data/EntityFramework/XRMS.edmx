@@ -1,0 +1,1489 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="XRMSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AREAS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="CODE_DEFINITION">
+          <Key>
+            <PropertyRef Name="TYPE" />
+          </Key>
+          <Property Name="TYPE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PREFIX" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="LAST_NUMBER" Type="bigint" Nullable="false" />
+          <Property Name="INCREMENT" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="MATERIAL_GROUPS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="MATERIAL_LOGS">
+          <Key>
+            <PropertyRef Name="LOG_COUNTER" />
+            <PropertyRef Name="MATERIAL_ID" />
+          </Key>
+          <Property Name="LOG_COUNTER" Type="bigint" Nullable="false" />
+          <Property Name="MATERIAL_ID" Type="int" Nullable="false" />
+          <Property Name="ACTOR" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LOG_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="ACTION" Type="tinyint" Nullable="false" />
+          <Property Name="CURRENT_AMOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UPDATED_AMOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MATERIALS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="GROUP_ID" Type="int" Nullable="false" />
+          <Property Name="UNIT_ID" Type="int" Nullable="false" />
+          <Property Name="AMOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="USAGE_AMOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CONFIRMATION_DATE" Type="datetime" Nullable="false" />
+          <Property Name="LAST_CONFIRMATION_AMOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDER_ITEMS">
+          <Key>
+            <PropertyRef Name="SEQUENCE" />
+            <PropertyRef Name="ORDER_ID" />
+          </Key>
+          <Property Name="SEQUENCE" Type="tinyint" Nullable="false" />
+          <Property Name="ORDER_ID" Type="bigint" Nullable="false" />
+          <Property Name="ITEM_ID" Type="int" Nullable="false" />
+          <Property Name="QUANTITY" Type="int" Nullable="false" />
+          <Property Name="CREATE_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="STATE" Type="tinyint" Nullable="false" />
+          <Property Name="START_PROCESS_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="STOP_PROCESS_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="SERVE_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="IS_CANCELLED" Type="bit" Nullable="false" />
+          <Property Name="OUT_KITCHEN_PROCESS" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ORDERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TABLE_ID" Type="int" Nullable="false" />
+          <Property Name="USER_ID" Type="int" Nullable="false" />
+          <Property Name="STATE" Type="tinyint" Nullable="false" />
+          <Property Name="ORDER_TIME" Type="datetime" Nullable="false" />
+          <Property Name="EDIT_TIME" Type="datetime" Nullable="false" />
+          <Property Name="BILL_TIME" Type="datetime" Nullable="false" />
+          <Property Name="CHECKOUT_TIME" Type="datetime" Nullable="false" />
+          <Property Name="SUB_TOTAL_PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TOTAL_PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SERVICE_CHARGE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VAT_ENABLE" Type="bit" Nullable="false" />
+          <Property Name="VAT_PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DISCOUNT_PERCENT" Type="tinyint" Nullable="false" />
+          <Property Name="DISCOUNT_PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SPECIAL_DISCOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CASH" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CHANGE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="LOCK_STATE" Type="bit" Nullable="false" />
+          <Property Name="LOCK_KEEPER_ID" Type="int" Nullable="false" />
+          <Property Name="PRINT_COUNT" Type="tinyint" Nullable="false" />
+          <Property Name="IS_CANCELLED" Type="bit" Nullable="false" />
+          <Property Name="CANCEL_REASON" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="REPORT_COUNTER" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISSIONS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ROLE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="PRODUCT_GROUPS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UNIT_ID" Type="int" Nullable="false" />
+          <Property Name="GROUP_ID" Type="int" Nullable="false" />
+          <Property Name="PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="IMAGE" Type="image" />
+          <Property Name="ALWAYS_READY" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RECIPES">
+          <Key>
+            <PropertyRef Name="SEQUENCE" />
+            <PropertyRef Name="PRODUCT_ID" />
+            <PropertyRef Name="MATERIAL_ID" />
+          </Key>
+          <Property Name="SEQUENCE" Type="tinyint" Nullable="false" />
+          <Property Name="PRODUCT_ID" Type="int" Nullable="false" />
+          <Property Name="MATERIAL_ID" Type="int" Nullable="false" />
+          <Property Name="USED_AMOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REP_EVENTS">
+          <Key>
+            <PropertyRef Name="REPORT_COUNTER" />
+            <PropertyRef Name="EVENT_COUNTER" />
+          </Key>
+          <Property Name="REPORT_COUNTER" Type="bigint" Nullable="false" />
+          <Property Name="EVENT_COUNTER" Type="int" Nullable="false" />
+          <Property Name="EVENT_DATE" Type="datetime" Nullable="false" />
+          <Property Name="EVENT_CLASS" Type="int" Nullable="false" />
+          <Property Name="TEXT" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REP_MATERIALS">
+          <Key>
+            <PropertyRef Name="REPORT_COUNTER" />
+            <PropertyRef Name="ITEM_SEQUENCE" />
+            <PropertyRef Name="MATERIAL_CODE" />
+          </Key>
+          <Property Name="REPORT_COUNTER" Type="bigint" Nullable="false" />
+          <Property Name="ITEM_SEQUENCE" Type="tinyint" Nullable="false" />
+          <Property Name="MATERIAL_CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="MATERIAL_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="AMOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="UNIT" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REP_ORDER_EDITIONS">
+          <Key>
+            <PropertyRef Name="REPORT_COUNTER" />
+            <PropertyRef Name="EDITION_COUNTER" />
+          </Key>
+          <Property Name="REPORT_COUNTER" Type="bigint" Nullable="false" />
+          <Property Name="EDITION_COUNTER" Type="int" Nullable="false" />
+          <Property Name="EDITION_DATE" Type="datetime" Nullable="false" />
+          <Property Name="EDITION_USER" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REP_ORDER_ITEM_EDITIONS">
+          <Key>
+            <PropertyRef Name="REPORT_COUNTER" />
+            <PropertyRef Name="EDITION_COUNTER" />
+            <PropertyRef Name="SEQUENCE" />
+          </Key>
+          <Property Name="REPORT_COUNTER" Type="bigint" Nullable="false" />
+          <Property Name="EDITION_COUNTER" Type="int" Nullable="false" />
+          <Property Name="SEQUENCE" Type="tinyint" Nullable="false" />
+          <Property Name="ITEM_CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ITEM_NAME" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="EDIDITON_TYPE" Type="tinyint" Nullable="false" />
+          <Property Name="EDITTED_QUANTITY" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REP_ORDER_ITEMS">
+          <Key>
+            <PropertyRef Name="REPORT_COUNTER" />
+            <PropertyRef Name="SEQUENCE" />
+          </Key>
+          <Property Name="REPORT_COUNTER" Type="bigint" Nullable="false" />
+          <Property Name="SEQUENCE" Type="tinyint" Nullable="false" />
+          <Property Name="ITEM_CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="ITEM_NAME" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ITEM_GROUP" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="UNIT" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="QUANTITY" Type="int" Nullable="false" />
+          <Property Name="STATE" Type="tinyint" Nullable="false" />
+          <Property Name="CREATE_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="START_PROCESS_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="STOP_PROCESS_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="SERVE_DATETIME" Type="datetime" Nullable="false" />
+          <Property Name="IS_CANCELLED" Type="bit" Nullable="false" />
+          <Property Name="OUT_KITCHEN_PROCESS" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REPORTS">
+          <Key>
+            <PropertyRef Name="REPORT_COUNTER" />
+          </Key>
+          <Property Name="REPORT_COUNTER" Type="bigint" Nullable="false" />
+          <Property Name="ORDER_ID" Type="bigint" Nullable="false" />
+          <Property Name="ORDER_CODE" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="TABLE_CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TABLE_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="WAITER" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="STATE" Type="tinyint" Nullable="false" />
+          <Property Name="ORDER_TIME" Type="datetime" Nullable="false" />
+          <Property Name="EDIT_TIME" Type="datetime" Nullable="false" />
+          <Property Name="BILL_TIME" Type="datetime" Nullable="false" />
+          <Property Name="CHECKOUT_TIME" Type="datetime" Nullable="false" />
+          <Property Name="SUB_TOTAL_PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="TOTAL_PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SERVICE_CHARGE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="VAT_ENABLE" Type="bit" Nullable="false" />
+          <Property Name="VAT_PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="DISCOUNT_PERCENT" Type="tinyint" Nullable="false" />
+          <Property Name="DISCOUNT_PRICE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="SPECIAL_DISCOUNT" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CASH" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="CHANGE" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="PRINT_COUNT" Type="tinyint" Nullable="false" />
+          <Property Name="IS_CANCELLED" Type="bit" Nullable="false" />
+          <Property Name="CANCEL_REASON" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RESTAURANT_INFO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ADDRESS" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PHONE_1" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="PHONE_2" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="PHONE_3" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="WEBSITE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="LOGO_PATH" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TABLES">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CAPACITY" Type="tinyint" Nullable="false" />
+          <Property Name="AREA_ID" Type="int" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="nvarchar(max)" />
+          <Property Name="STATE" Type="tinyint" Nullable="false" />
+          <Property Name="CURRENT_ORDER_ID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UNITS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="CODE" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="USER_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FULL_NAME" Type="nvarchar" MaxLength="50" />
+          <Property Name="PASSWORD" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PERMISSION_ID" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__REP_ORDER__REPOR__12149A71">
+          <End Role="REPORTS" Type="Self.REPORTS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="REP_ORDER_EDITIONS" Type="Self.REP_ORDER_EDITIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REPORTS">
+              <PropertyRef Name="REPORT_COUNTER" />
+            </Principal>
+            <Dependent Role="REP_ORDER_EDITIONS">
+              <PropertyRef Name="REPORT_COUNTER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIAL_LOGS_MATERIALS">
+          <End Role="MATERIALS" Type="Self.MATERIALS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="MATERIAL_LOGS" Type="Self.MATERIAL_LOGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIALS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIAL_LOGS">
+              <PropertyRef Name="MATERIAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MATERIALS_MATERIAL_GROUPS">
+          <End Role="MATERIAL_GROUPS" Type="Self.MATERIAL_GROUPS" Multiplicity="1" />
+          <End Role="MATERIALS" Type="Self.MATERIALS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIAL_GROUPS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="MATERIALS">
+              <PropertyRef Name="GROUP_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDER_ITEMS_ORDERS">
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ORDER_ITEMS" Type="Self.ORDER_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDER_ITEMS">
+              <PropertyRef Name="ORDER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDER_ITEMS_PRODUCTS">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1" />
+          <End Role="ORDER_ITEMS" Type="Self.ORDER_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDER_ITEMS">
+              <PropertyRef Name="ITEM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDERS_TABLES">
+          <End Role="TABLES" Type="Self.TABLES" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TABLES">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="TABLE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDERS_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="USER_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECIPES_MATERIALS">
+          <End Role="MATERIALS" Type="Self.MATERIALS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIALS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RECIPES">
+              <PropertyRef Name="MATERIAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECIPES_PRODUCTS">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RECIPES">
+              <PropertyRef Name="PRODUCT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REP_EVENTS_REPORTS">
+          <End Role="REPORTS" Type="Self.REPORTS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="REP_EVENTS" Type="Self.REP_EVENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REPORTS">
+              <PropertyRef Name="REPORT_COUNTER" />
+            </Principal>
+            <Dependent Role="REP_EVENTS">
+              <PropertyRef Name="REPORT_COUNTER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REP_MATERIALS_REP_ORDER_ITEMS">
+          <End Role="REP_ORDER_ITEMS" Type="Self.REP_ORDER_ITEMS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="REP_MATERIALS" Type="Self.REP_MATERIALS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REP_ORDER_ITEMS">
+              <PropertyRef Name="SEQUENCE" />
+              <PropertyRef Name="REPORT_COUNTER" />
+            </Principal>
+            <Dependent Role="REP_MATERIALS">
+              <PropertyRef Name="ITEM_SEQUENCE" />
+              <PropertyRef Name="REPORT_COUNTER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REP_ORDER_ITEM_EDITIONS_REP_ORDER_EDITIONS">
+          <End Role="REP_ORDER_EDITIONS" Type="Self.REP_ORDER_EDITIONS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="REP_ORDER_ITEM_EDITIONS" Type="Self.REP_ORDER_ITEM_EDITIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REP_ORDER_EDITIONS">
+              <PropertyRef Name="REPORT_COUNTER" />
+              <PropertyRef Name="EDITION_COUNTER" />
+            </Principal>
+            <Dependent Role="REP_ORDER_ITEM_EDITIONS">
+              <PropertyRef Name="REPORT_COUNTER" />
+              <PropertyRef Name="EDITION_COUNTER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REP_ORDER_ITEMS_REPORTS">
+          <End Role="REPORTS" Type="Self.REPORTS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="REP_ORDER_ITEMS" Type="Self.REP_ORDER_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REPORTS">
+              <PropertyRef Name="REPORT_COUNTER" />
+            </Principal>
+            <Dependent Role="REP_ORDER_ITEMS">
+              <PropertyRef Name="REPORT_COUNTER" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TABLES_AREAS">
+          <End Role="AREAS" Type="Self.AREAS" Multiplicity="1" />
+          <End Role="TABLES" Type="Self.TABLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AREAS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TABLES">
+              <PropertyRef Name="AREA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_PERMISSIONS">
+          <End Role="PERMISSIONS" Type="Self.PERMISSIONS" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISSIONS">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="PERMISSION_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="XRMSModelStoreContainer">
+          <EntitySet Name="AREAS" EntityType="Self.AREAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CODE_DEFINITION" EntityType="Self.CODE_DEFINITION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIAL_GROUPS" EntityType="Self.MATERIAL_GROUPS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIAL_LOGS" EntityType="Self.MATERIAL_LOGS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIALS" EntityType="Self.MATERIALS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDER_ITEMS" EntityType="Self.ORDER_ITEMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCT_GROUPS" EntityType="Self.PRODUCT_GROUPS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECIPES" EntityType="Self.RECIPES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REP_EVENTS" EntityType="Self.REP_EVENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REP_MATERIALS" EntityType="Self.REP_MATERIALS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REP_ORDER_EDITIONS" EntityType="Self.REP_ORDER_EDITIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REP_ORDER_ITEM_EDITIONS" EntityType="Self.REP_ORDER_ITEM_EDITIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REP_ORDER_ITEMS" EntityType="Self.REP_ORDER_ITEMS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REPORTS" EntityType="Self.REPORTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RESTAURANT_INFO" EntityType="Self.RESTAURANT_INFO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TABLES" EntityType="Self.TABLES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UNITS" EntityType="Self.UNITS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__REP_ORDER__REPOR__12149A71" Association="Self.FK__REP_ORDER__REPOR__12149A71">
+            <End Role="REPORTS" EntitySet="REPORTS" />
+            <End Role="REP_ORDER_EDITIONS" EntitySet="REP_ORDER_EDITIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIAL_LOGS_MATERIALS" Association="Self.FK_MATERIAL_LOGS_MATERIALS">
+            <End Role="MATERIALS" EntitySet="MATERIALS" />
+            <End Role="MATERIAL_LOGS" EntitySet="MATERIAL_LOGS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MATERIALS_MATERIAL_GROUPS" Association="Self.FK_MATERIALS_MATERIAL_GROUPS">
+            <End Role="MATERIAL_GROUPS" EntitySet="MATERIAL_GROUPS" />
+            <End Role="MATERIALS" EntitySet="MATERIALS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER_ITEMS_ORDERS" Association="Self.FK_ORDER_ITEMS_ORDERS">
+            <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="ORDER_ITEMS" EntitySet="ORDER_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER_ITEMS_PRODUCTS" Association="Self.FK_ORDER_ITEMS_PRODUCTS">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="ORDER_ITEMS" EntitySet="ORDER_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_TABLES" Association="Self.FK_ORDERS_TABLES">
+            <End Role="TABLES" EntitySet="TABLES" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_USERS" Association="Self.FK_ORDERS_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECIPES_MATERIALS" Association="Self.FK_RECIPES_MATERIALS">
+            <End Role="MATERIALS" EntitySet="MATERIALS" />
+            <End Role="RECIPES" EntitySet="RECIPES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECIPES_PRODUCTS" Association="Self.FK_RECIPES_PRODUCTS">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="RECIPES" EntitySet="RECIPES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REP_EVENTS_REPORTS" Association="Self.FK_REP_EVENTS_REPORTS">
+            <End Role="REPORTS" EntitySet="REPORTS" />
+            <End Role="REP_EVENTS" EntitySet="REP_EVENTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REP_MATERIALS_REP_ORDER_ITEMS" Association="Self.FK_REP_MATERIALS_REP_ORDER_ITEMS">
+            <End Role="REP_ORDER_ITEMS" EntitySet="REP_ORDER_ITEMS" />
+            <End Role="REP_MATERIALS" EntitySet="REP_MATERIALS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REP_ORDER_ITEM_EDITIONS_REP_ORDER_EDITIONS" Association="Self.FK_REP_ORDER_ITEM_EDITIONS_REP_ORDER_EDITIONS">
+            <End Role="REP_ORDER_EDITIONS" EntitySet="REP_ORDER_EDITIONS" />
+            <End Role="REP_ORDER_ITEM_EDITIONS" EntitySet="REP_ORDER_ITEM_EDITIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REP_ORDER_ITEMS_REPORTS" Association="Self.FK_REP_ORDER_ITEMS_REPORTS">
+            <End Role="REPORTS" EntitySet="REPORTS" />
+            <End Role="REP_ORDER_ITEMS" EntitySet="REP_ORDER_ITEMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TABLES_AREAS" Association="Self.FK_TABLES_AREAS">
+            <End Role="AREAS" EntitySet="AREAS" />
+            <End Role="TABLES" EntitySet="TABLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_PERMISSIONS" Association="Self.FK_USERS_PERMISSIONS">
+            <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="XRMSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AreaEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Tables" Relationship="Self.FK_TABLES_AREAS" FromRole="AREAS" ToRole="TABLES" />
+        </EntityType>
+        <EntityType Name="TableEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Capacity" Type="Byte" Nullable="false" />
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Byte" Nullable="false" />
+          <Property Name="CurrentOrderId" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="Area" Relationship="Self.FK_TABLES_AREAS" FromRole="TABLES" ToRole="AREAS" />
+        </EntityType>
+        <EntityType Name="UserEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleId" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="XRMSModel.FK_USERS_PERMISSIONS" FromRole="USER" ToRole="PERMISSION" />
+        </EntityType>
+        <Association Name="FK_TABLES_AREAS">
+          <End Role="AREAS" Type="XRMSModel.AreaEntity" Multiplicity="1" />
+          <End Role="TABLES" Type="XRMSModel.TableEntity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AREAS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TABLES">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="XRMSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AREAS" EntityType="XRMSModel.AreaEntity" />
+          <EntitySet Name="TABLES" EntityType="XRMSModel.TableEntity" />
+          <EntitySet Name="USERS" EntityType="XRMSModel.UserEntity" />
+          <AssociationSet Name="FK_TABLES_AREAS" Association="Self.FK_TABLES_AREAS">
+            <End Role="AREAS" EntitySet="AREAS" />
+            <End Role="TABLES" EntitySet="TABLES" />
+          </AssociationSet>
+          <EntitySet Name="PERMISSIONS" EntityType="XRMSModel.UserRoleEntity" />
+          <AssociationSet Name="FK_USERS_PERMISSIONS" Association="XRMSModel.FK_USERS_PERMISSIONS">
+            <End Role="PERMISSION" EntitySet="PERMISSIONS" />
+            <End Role="USER" EntitySet="USERS" />
+          </AssociationSet>
+          <EntitySet Name="ProductGroupEntities" EntityType="XRMSModel.ProductGroupEntity" />
+          <EntitySet Name="PRODUCTS" EntityType="XRMSModel.ProductEntity" />
+          <EntitySet Name="UNITS" EntityType="XRMSModel.UnitEntity" />
+          <EntitySet Name="MaterialGroupEntities" EntityType="XRMSModel.MaterialGroupEntity" />
+          <EntitySet Name="MATERIALS" EntityType="XRMSModel.MaterialEntity" />
+          <AssociationSet Name="FK_MATERIALS_MATERIAL_GROUPS" Association="XRMSModel.FK_MATERIALS_MATERIAL_GROUPS">
+            <End Role="MATERIAL_GROUPS" EntitySet="MaterialGroupEntities" />
+            <End Role="MATERIAL" EntitySet="MATERIALS" />
+          </AssociationSet>
+          <EntitySet Name="RECIPES" EntityType="XRMSModel.RecipeItemEntity" />
+          <AssociationSet Name="FK_RECIPES_MATERIALS" Association="XRMSModel.FK_RECIPES_MATERIALS">
+            <End Role="MaterialEntity" EntitySet="MATERIALS" />
+            <End Role="RECIPE" EntitySet="RECIPES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RECIPES_PRODUCTS" Association="XRMSModel.FK_RECIPES_PRODUCTS">
+            <End Role="ProductEntity" EntitySet="PRODUCTS" />
+            <End Role="RECIPE" EntitySet="RECIPES" />
+          </AssociationSet>
+          <EntitySet Name="OrderItemEntities" EntityType="XRMSModel.OrderItemEntity" />
+          <EntitySet Name="ORDERS" EntityType="XRMSModel.OrderEntity" />
+          <EntitySet Name="CodeDefinitionEntities" EntityType="XRMSModel.CodeDefinitionEntity" />
+          <AssociationSet Name="FK_ORDER_ITEMS_ORDERS" Association="XRMSModel.FK_ORDER_ITEMS_ORDERS">
+            <End Role="ORDER" EntitySet="ORDERS" />
+            <End Role="ORDER_ITEMS" EntitySet="OrderItemEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDER_ITEMS_PRODUCTS" Association="XRMSModel.FK_ORDER_ITEMS_PRODUCTS">
+            <End Role="ProductEntity" EntitySet="PRODUCTS" />
+            <End Role="ORDER_ITEMS" EntitySet="OrderItemEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_TABLES" Association="XRMSModel.FK_ORDERS_TABLES">
+            <End Role="TableEntity" EntitySet="TABLES" />
+            <End Role="ORDER" EntitySet="ORDERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ORDERS_USERS" Association="XRMSModel.FK_ORDERS_USERS">
+            <End Role="UserEntity" EntitySet="USERS" />
+            <End Role="ORDER" EntitySet="ORDERS" />
+          </AssociationSet>
+          <EntitySet Name="MaterialLogEntities" EntityType="XRMSModel.MaterialLogEntity" />
+          <EntitySet Name="ReportEventEntities" EntityType="XRMSModel.ReportEventEntity" />
+          <EntitySet Name="ReportOrderEditionEntities" EntityType="XRMSModel.ReportOrderEditionEntity" />
+          <EntitySet Name="ReportOrderItemEditionEntities" EntityType="XRMSModel.ReportOrderItemEditionEntity" />
+          <EntitySet Name="ReportOrderItemEntities" EntityType="XRMSModel.ReportOrderItemEntity" />
+          <EntitySet Name="REPORTS" EntityType="XRMSModel.ReportOrderEntity" />
+          <EntitySet Name="RestaurantEntities" EntityType="XRMSModel.RestaurantEntity" />
+          <EntitySet Name="ReportMaterialEntities" EntityType="XRMSModel.ReportMaterialEntity" />
+          <AssociationSet Name="FK_MATERIAL_LOGS_MATERIALS" Association="XRMSModel.FK_MATERIAL_LOGS_MATERIALS">
+            <End Role="MaterialEntity" EntitySet="MATERIALS" />
+            <End Role="MATERIAL_LOGS" EntitySet="MaterialLogEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REP_EVENTS_REPORTS" Association="XRMSModel.FK_REP_EVENTS_REPORTS">
+            <End Role="REPORT" EntitySet="REPORTS" />
+            <End Role="REP_EVENTS" EntitySet="ReportEventEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REP_ORDER__REPOR__12149A71" Association="XRMSModel.FK__REP_ORDER__REPOR__12149A71">
+            <End Role="REPORT" EntitySet="REPORTS" />
+            <End Role="REP_ORDER_EDITIONS" EntitySet="ReportOrderEditionEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REP_ORDER_ITEM_EDITIONS_REP_ORDER_EDITIONS" Association="XRMSModel.FK_REP_ORDER_ITEM_EDITIONS_REP_ORDER_EDITIONS">
+            <End Role="REP_ORDER_EDITIONS" EntitySet="ReportOrderEditionEntities" />
+            <End Role="REP_ORDER_ITEM_EDITIONS" EntitySet="ReportOrderItemEditionEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REP_MATERIALS_REP_ORDER_ITEMS" Association="XRMSModel.FK_REP_MATERIALS_REP_ORDER_ITEMS">
+            <End Role="REP_ORDER_ITEMS" EntitySet="ReportOrderItemEntities" />
+            <End Role="REP_MATERIALS" EntitySet="ReportMaterialEntities" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REP_ORDER_ITEMS_REPORTS" Association="XRMSModel.FK_REP_ORDER_ITEMS_REPORTS">
+            <End Role="REPORT" EntitySet="REPORTS" />
+            <End Role="REP_ORDER_ITEMS" EntitySet="ReportOrderItemEntities" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="UserRoleEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="XRMSModel.FK_USERS_PERMISSIONS" FromRole="PERMISSION" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK_USERS_PERMISSIONS">
+          <End Type="XRMSModel.UserRoleEntity" Role="PERMISSION" Multiplicity="1" />
+          <End Type="XRMSModel.UserEntity" Role="USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISSION">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductGroupEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ProductEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="IsAlwaysReady" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UnitEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MaterialGroupEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Materials" Relationship="XRMSModel.FK_MATERIALS_MATERIAL_GROUPS" FromRole="MATERIAL_GROUPS" ToRole="MATERIAL" />
+        </EntityType>
+        <EntityType Name="MaterialEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GroupId" Type="Int32" Nullable="false" />
+          <Property Name="UnitId" Type="Int32" Nullable="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UsageAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ConfirmationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastConfirmationAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="MaterialGroup" Relationship="XRMSModel.FK_MATERIALS_MATERIAL_GROUPS" FromRole="MATERIAL" ToRole="MATERIAL_GROUPS" />
+        </EntityType>
+        <Association Name="FK_MATERIALS_MATERIAL_GROUPS">
+          <End Type="XRMSModel.MaterialGroupEntity" Role="MATERIAL_GROUPS" Multiplicity="1" />
+          <End Type="XRMSModel.MaterialEntity" Role="MATERIAL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIAL_GROUPS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MATERIAL">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="RecipeItemEntity">
+          <Key>
+            <PropertyRef Name="Sequence" />
+            <PropertyRef Name="ProductId" />
+            <PropertyRef Name="MaterialId" />
+          </Key>
+          <Property Name="Sequence" Type="Byte" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="UsedAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+        </EntityType>
+        <Association Name="FK_RECIPES_MATERIALS">
+          <End Type="XRMSModel.MaterialEntity" Role="MaterialEntity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.RecipeItemEntity" Role="RECIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RECIPE">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RECIPES_PRODUCTS">
+          <End Type="XRMSModel.ProductEntity" Role="ProductEntity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.RecipeItemEntity" Role="RECIPE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RECIPE">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrderItemEntity">
+          <Key>
+            <PropertyRef Name="Sequence" />
+            <PropertyRef Name="OrderId" />
+          </Key>
+          <Property Name="Sequence" Type="Byte" Nullable="false" />
+          <Property Name="OrderId" Type="Int64" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="State" Type="Byte" Nullable="false" />
+          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+          <Property Name="IsAlwaysReady" Type="Boolean" Nullable="false" />
+          <Property Name="StartDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StopDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ServeDatetime" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="OrderEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TableId" Type="Int32" Nullable="false" />
+          <Property Name="CreatorId" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Byte" Nullable="false" />
+          <Property Name="OrderDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BillDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CheckoutDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubTotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Nullable="false" Precision="18" Scale="2" Type="Decimal" />
+          <Property Name="ServiceCharge" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VatEnable" Type="Boolean" Nullable="false" />
+          <Property Name="VatPrice" Nullable="false" Precision="18" Scale="2" Type="Decimal" />
+          <Property Name="DiscountPercent" Type="Byte" Nullable="false" />
+          <Property Name="DiscountPrice" Nullable="false" Precision="18" Scale="2" Type="Decimal" />
+          <Property Name="SpecialDiscount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Cash" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Change" Nullable="false" Precision="18" Scale="2" Type="Decimal" />
+          <Property Name="LockState" Type="Boolean" Nullable="false" />
+          <Property Name="LockKeeperId" Type="Int32" Nullable="false" />
+          <Property Name="PrintCount" Type="Byte" Nullable="false" />
+          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+          <Property Name="CancelReason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReportCounter" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CodeDefinitionEntity">
+          <Key>
+            <PropertyRef Name="Type" />
+          </Key>
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prefix" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="LastIndex" Type="Int64" Nullable="false" />
+          <Property Name="Increment" Type="Byte" />
+        </EntityType>
+        <Association Name="FK_ORDER_ITEMS_ORDERS">
+          <End Type="XRMSModel.OrderEntity" Role="ORDER" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.OrderItemEntity" Role="ORDER_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDER">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDER_ITEMS">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDER_ITEMS_PRODUCTS">
+          <End Type="XRMSModel.ProductEntity" Role="ProductEntity" Multiplicity="1" />
+          <End Type="XRMSModel.OrderItemEntity" Role="ORDER_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDER_ITEMS">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDERS_TABLES">
+          <End Type="XRMSModel.TableEntity" Role="TableEntity" Multiplicity="1" />
+          <End Type="XRMSModel.OrderEntity" Role="ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TableEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDER">
+              <PropertyRef Name="TableId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ORDERS_USERS">
+          <End Type="XRMSModel.UserEntity" Role="UserEntity" Multiplicity="1" />
+          <End Type="XRMSModel.OrderEntity" Role="ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDER">
+              <PropertyRef Name="CreatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MaterialLogEntity">
+          <Key>
+            <PropertyRef Name="LogCounter" />
+            <PropertyRef Name="MaterialId" />
+          </Key>
+          <Property Name="LogCounter" Type="Int64" Nullable="false" />
+          <Property Name="MaterialId" Type="Int32" Nullable="false" />
+          <Property Name="Actor" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LogDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Action" Type="Byte" Nullable="false" />
+          <Property Name="CurrentAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="NewAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <NavigationProperty Name="MATERIAL" Relationship="XRMSModel.FK_MATERIAL_LOGS_MATERIALS" FromRole="MATERIAL_LOGS" ToRole="MaterialEntity" />
+        </EntityType>
+        <EntityType Name="ReportEventEntity">
+          <Key>
+            <PropertyRef Name="ReportCounter" />
+            <PropertyRef Name="EventCounter" />
+          </Key>
+          <Property Name="ReportCounter" Type="Int64" Nullable="false" />
+          <Property Name="EventCounter" Type="Int32" Nullable="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EventClass" Type="Int32" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ReportOrderEditionEntity">
+          <Key>
+            <PropertyRef Name="ReportCounter" />
+            <PropertyRef Name="EditionCounter" />
+          </Key>
+          <Property Name="ReportCounter" Type="Int64" Nullable="false" />
+          <Property Name="EditionCounter" Type="Int32" Nullable="false" />
+          <Property Name="EditionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditionUser" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ReportOrderItemEditionEntity">
+          <Key>
+            <PropertyRef Name="ReportCounter" />
+            <PropertyRef Name="EditionCounter" />
+            <PropertyRef Name="Sequence" />
+          </Key>
+          <Property Name="ReportCounter" Type="Int64" Nullable="false" />
+          <Property Name="EditionCounter" Type="Int32" Nullable="false" />
+          <Property Name="Sequence" Type="Byte" Nullable="false" />
+          <Property Name="ProductCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="EditionType" Type="Byte" Nullable="false" />
+          <Property Name="EdittedQuantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportOrderItemEntity">
+          <Key>
+            <PropertyRef Name="ReportCounter" />
+            <PropertyRef Name="Sequence" />
+          </Key>
+          <Property Name="ReportCounter" Type="Int64" Nullable="false" />
+          <Property Name="Sequence" Type="Byte" Nullable="false" />
+          <Property Name="ProductCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ProductGroup" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UnitName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="Byte" Nullable="false" />
+          <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StopDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ServeDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+          <Property Name="IsAlwaysReady" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReportOrderEntity">
+          <Key>
+            <PropertyRef Name="ReportCounter" />
+          </Key>
+          <Property Name="ReportCounter" Type="Int64" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TableCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TableName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Byte" Nullable="false" />
+          <Property Name="OrderDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EditDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="BillDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CheckoutDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubTotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="TotalPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="ServiceCharge" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="VatEnable" Type="Boolean" Nullable="false" />
+          <Property Name="VatPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="DiscountPercent" Type="Byte" Nullable="false" />
+          <Property Name="DiscountPrice" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="SpecialDiscount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Cash" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Change" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="PrintCount" Type="Byte" Nullable="false" />
+          <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
+          <Property Name="CancelReason" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          </EntityType>
+        <EntityType Name="RestaurantEntity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber1" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber2" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber3" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LogoPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ReportMaterialEntity">
+          <Key>
+            <PropertyRef Name="ReportCounter" />
+            <PropertyRef Name="OrderItemSequence" />
+            <PropertyRef Name="MaterialCode" />
+          </Key>
+          <Property Name="ReportCounter" Type="Int64" Nullable="false" />
+          <Property Name="OrderItemSequence" Type="Byte" Nullable="false" />
+          <Property Name="MaterialCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="MaterialName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="UnitName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_MATERIAL_LOGS_MATERIALS">
+          <End Type="XRMSModel.MaterialEntity" Role="MaterialEntity" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.MaterialLogEntity" Role="MATERIAL_LOGS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MaterialEntity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MATERIAL_LOGS">
+              <PropertyRef Name="MaterialId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REP_EVENTS_REPORTS">
+          <End Type="XRMSModel.ReportOrderEntity" Role="REPORT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.ReportEventEntity" Role="REP_EVENTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REPORT">
+              <PropertyRef Name="ReportCounter" />
+            </Principal>
+            <Dependent Role="REP_EVENTS">
+              <PropertyRef Name="ReportCounter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REP_ORDER__REPOR__12149A71">
+          <End Type="XRMSModel.ReportOrderEntity" Role="REPORT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.ReportOrderEditionEntity" Role="REP_ORDER_EDITIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REPORT">
+              <PropertyRef Name="ReportCounter" />
+            </Principal>
+            <Dependent Role="REP_ORDER_EDITIONS">
+              <PropertyRef Name="ReportCounter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REP_ORDER_ITEM_EDITIONS_REP_ORDER_EDITIONS">
+          <End Type="XRMSModel.ReportOrderEditionEntity" Role="REP_ORDER_EDITIONS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.ReportOrderItemEditionEntity" Role="REP_ORDER_ITEM_EDITIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REP_ORDER_EDITIONS">
+              <PropertyRef Name="ReportCounter" />
+              <PropertyRef Name="EditionCounter" />
+            </Principal>
+            <Dependent Role="REP_ORDER_ITEM_EDITIONS">
+              <PropertyRef Name="ReportCounter" />
+              <PropertyRef Name="EditionCounter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REP_MATERIALS_REP_ORDER_ITEMS">
+          <End Type="XRMSModel.ReportOrderItemEntity" Role="REP_ORDER_ITEMS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.ReportMaterialEntity" Role="REP_MATERIALS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REP_ORDER_ITEMS">
+              <PropertyRef Name="Sequence" />
+              <PropertyRef Name="ReportCounter" />
+            </Principal>
+            <Dependent Role="REP_MATERIALS">
+              <PropertyRef Name="OrderItemSequence" />
+              <PropertyRef Name="ReportCounter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REP_ORDER_ITEMS_REPORTS">
+          <End Type="XRMSModel.ReportOrderEntity" Role="REPORT" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="XRMSModel.ReportOrderItemEntity" Role="REP_ORDER_ITEMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REPORT">
+              <PropertyRef Name="ReportCounter" />
+            </Principal>
+            <Dependent Role="REP_ORDER_ITEMS">
+              <PropertyRef Name="ReportCounter" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="XRMSModelStoreContainer" CdmEntityContainer="XRMSEntities">
+          <EntitySetMapping Name="AREAS">
+            <EntityTypeMapping TypeName="XRMSModel.AreaEntity">
+              <MappingFragment StoreEntitySet="AREAS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Description" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TABLES">
+            <EntityTypeMapping TypeName="XRMSModel.TableEntity">
+              <MappingFragment StoreEntitySet="TABLES">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Capacity" ColumnName="CAPACITY" />
+                <ScalarProperty Name="LocationId" ColumnName="AREA_ID" />
+                <ScalarProperty Name="Description" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="State" ColumnName="STATE" />
+                <ScalarProperty Name="CurrentOrderId" ColumnName="CURRENT_ORDER_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="XRMSModel.UserEntity">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="Id" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="USER_NAME" />
+                <ScalarProperty Name="Fullname" ColumnName="FULL_NAME" />
+                <ScalarProperty Name="Password" ColumnName="PASSWORD" />
+                <ScalarProperty Name="RoleId" ColumnName="PERMISSION_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISSIONS">
+            <EntityTypeMapping TypeName="XRMSModel.UserRoleEntity">
+              <MappingFragment StoreEntitySet="PERMISSIONS">
+                <ScalarProperty Name="Description" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="Name" ColumnName="ROLE" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductGroupEntities">
+            <EntityTypeMapping TypeName="XRMSModel.ProductGroupEntity">
+              <MappingFragment StoreEntitySet="PRODUCT_GROUPS">
+                <ScalarProperty Name="Description" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTS">
+            <EntityTypeMapping TypeName="XRMSModel.ProductEntity">
+              <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="IsAlwaysReady" ColumnName="ALWAYS_READY" />
+                <ScalarProperty Name="Image" ColumnName="IMAGE" />
+                <ScalarProperty Name="Price" ColumnName="PRICE" />
+                <ScalarProperty Name="GroupId" ColumnName="GROUP_ID" />
+                <ScalarProperty Name="UnitId" ColumnName="UNIT_ID" />
+                <ScalarProperty Name="Description" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UNITS">
+            <EntityTypeMapping TypeName="XRMSModel.UnitEntity">
+              <MappingFragment StoreEntitySet="UNITS">
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialGroupEntities">
+            <EntityTypeMapping TypeName="XRMSModel.MaterialGroupEntity">
+              <MappingFragment StoreEntitySet="MATERIAL_GROUPS">
+                <ScalarProperty Name="Description" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MATERIALS">
+            <EntityTypeMapping TypeName="XRMSModel.MaterialEntity">
+              <MappingFragment StoreEntitySet="MATERIALS">
+                <ScalarProperty Name="LastConfirmationAmount" ColumnName="LAST_CONFIRMATION_AMOUNT" />
+                <ScalarProperty Name="ConfirmationDate" ColumnName="CONFIRMATION_DATE" />
+                <ScalarProperty Name="UsageAmount" ColumnName="USAGE_AMOUNT" />
+                <ScalarProperty Name="Amount" ColumnName="AMOUNT" />
+                <ScalarProperty Name="UnitId" ColumnName="UNIT_ID" />
+                <ScalarProperty Name="GroupId" ColumnName="GROUP_ID" />
+                <ScalarProperty Name="Description" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECIPES">
+            <EntityTypeMapping TypeName="XRMSModel.RecipeItemEntity">
+              <MappingFragment StoreEntitySet="RECIPES">
+                <ScalarProperty Name="UsedAmount" ColumnName="USED_AMOUNT" />
+                <ScalarProperty Name="MaterialId" ColumnName="MATERIAL_ID" />
+                <ScalarProperty Name="ProductId" ColumnName="PRODUCT_ID" />
+                <ScalarProperty Name="Sequence" ColumnName="SEQUENCE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItemEntities">
+            <EntityTypeMapping TypeName="XRMSModel.OrderItemEntity">
+              <MappingFragment StoreEntitySet="ORDER_ITEMS">
+                <ScalarProperty Name="ServeDatetime" ColumnName="SERVE_DATETIME" />
+                <ScalarProperty Name="StopDatetime" ColumnName="STOP_PROCESS_DATETIME" />
+                <ScalarProperty Name="StartDatetime" ColumnName="START_PROCESS_DATETIME" />
+                <ScalarProperty Name="IsAlwaysReady" ColumnName="OUT_KITCHEN_PROCESS" />
+                <ScalarProperty Name="IsCancelled" ColumnName="IS_CANCELLED" />
+                <ScalarProperty Name="State" ColumnName="STATE" />
+                <ScalarProperty Name="CreateDatetime" ColumnName="CREATE_DATETIME" />
+                <ScalarProperty Name="Quantity" ColumnName="QUANTITY" />
+                <ScalarProperty Name="ProductId" ColumnName="ITEM_ID" />
+                <ScalarProperty Name="OrderId" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="Sequence" ColumnName="SEQUENCE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDERS">
+            <EntityTypeMapping TypeName="XRMSModel.OrderEntity">
+              <MappingFragment StoreEntitySet="ORDERS">
+                <ScalarProperty Name="ReportCounter" ColumnName="REPORT_COUNTER" />
+                <ScalarProperty Name="CancelReason" ColumnName="CANCEL_REASON" />
+                <ScalarProperty Name="IsCancelled" ColumnName="IS_CANCELLED" />
+                <ScalarProperty Name="PrintCount" ColumnName="PRINT_COUNT" />
+                <ScalarProperty Name="LockKeeperId" ColumnName="LOCK_KEEPER_ID" />
+                <ScalarProperty Name="LockState" ColumnName="LOCK_STATE" />
+                <ScalarProperty Name="Change" ColumnName="CHANGE" />
+                <ScalarProperty Name="Cash" ColumnName="CASH" />
+                <ScalarProperty Name="SpecialDiscount" ColumnName="SPECIAL_DISCOUNT" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DISCOUNT_PRICE" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DISCOUNT_PERCENT" />
+                <ScalarProperty Name="VatPrice" ColumnName="VAT_PRICE" />
+                <ScalarProperty Name="VatEnable" ColumnName="VAT_ENABLE" />
+                <ScalarProperty Name="ServiceCharge" ColumnName="SERVICE_CHARGE" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TOTAL_PRICE" />
+                <ScalarProperty Name="SubTotalPrice" ColumnName="SUB_TOTAL_PRICE" />
+                <ScalarProperty Name="CheckoutDatetime" ColumnName="CHECKOUT_TIME" />
+                <ScalarProperty Name="BillDatetime" ColumnName="BILL_TIME" />
+                <ScalarProperty Name="EditDatetime" ColumnName="EDIT_TIME" />
+                <ScalarProperty Name="OrderDatetime" ColumnName="ORDER_TIME" />
+                <ScalarProperty Name="State" ColumnName="STATE" />
+                <ScalarProperty Name="CreatorId" ColumnName="USER_ID" />
+                <ScalarProperty Name="TableId" ColumnName="TABLE_ID" />
+                <ScalarProperty Name="Code" ColumnName="CODE" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CodeDefinitionEntities">
+            <EntityTypeMapping TypeName="XRMSModel.CodeDefinitionEntity">
+              <MappingFragment StoreEntitySet="CODE_DEFINITION">
+                <ScalarProperty Name="Increment" ColumnName="INCREMENT" />
+                <ScalarProperty Name="LastIndex" ColumnName="LAST_NUMBER" />
+                <ScalarProperty Name="Prefix" ColumnName="PREFIX" />
+                <ScalarProperty Name="Type" ColumnName="TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MaterialLogEntities">
+            <EntityTypeMapping TypeName="XRMSModel.MaterialLogEntity">
+              <MappingFragment StoreEntitySet="MATERIAL_LOGS">
+                <ScalarProperty Name="NewAmount" ColumnName="UPDATED_AMOUNT" />
+                <ScalarProperty Name="CurrentAmount" ColumnName="CURRENT_AMOUNT" />
+                <ScalarProperty Name="Action" ColumnName="ACTION" />
+                <ScalarProperty Name="LogDatetime" ColumnName="LOG_DATETIME" />
+                <ScalarProperty Name="Actor" ColumnName="ACTOR" />
+                <ScalarProperty Name="MaterialId" ColumnName="MATERIAL_ID" />
+                <ScalarProperty Name="LogCounter" ColumnName="LOG_COUNTER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportEventEntities">
+            <EntityTypeMapping TypeName="XRMSModel.ReportEventEntity">
+              <MappingFragment StoreEntitySet="REP_EVENTS">
+                <ScalarProperty Name="Text" ColumnName="TEXT" />
+                <ScalarProperty Name="EventClass" ColumnName="EVENT_CLASS" />
+                <ScalarProperty Name="EventDate" ColumnName="EVENT_DATE" />
+                <ScalarProperty Name="EventCounter" ColumnName="EVENT_COUNTER" />
+                <ScalarProperty Name="ReportCounter" ColumnName="REPORT_COUNTER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportOrderEditionEntities">
+            <EntityTypeMapping TypeName="XRMSModel.ReportOrderEditionEntity">
+              <MappingFragment StoreEntitySet="REP_ORDER_EDITIONS">
+                <ScalarProperty Name="EditionUser" ColumnName="EDITION_USER" />
+                <ScalarProperty Name="EditionDate" ColumnName="EDITION_DATE" />
+                <ScalarProperty Name="EditionCounter" ColumnName="EDITION_COUNTER" />
+                <ScalarProperty Name="ReportCounter" ColumnName="REPORT_COUNTER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportOrderItemEditionEntities">
+            <EntityTypeMapping TypeName="XRMSModel.ReportOrderItemEditionEntity">
+              <MappingFragment StoreEntitySet="REP_ORDER_ITEM_EDITIONS">
+                <ScalarProperty Name="EdittedQuantity" ColumnName="EDITTED_QUANTITY" />
+                <ScalarProperty Name="EditionType" ColumnName="EDIDITON_TYPE" />
+                <ScalarProperty Name="ProductName" ColumnName="ITEM_NAME" />
+                <ScalarProperty Name="ProductCode" ColumnName="ITEM_CODE" />
+                <ScalarProperty Name="Sequence" ColumnName="SEQUENCE" />
+                <ScalarProperty Name="EditionCounter" ColumnName="EDITION_COUNTER" />
+                <ScalarProperty Name="ReportCounter" ColumnName="REPORT_COUNTER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportOrderItemEntities">
+            <EntityTypeMapping TypeName="XRMSModel.ReportOrderItemEntity">
+              <MappingFragment StoreEntitySet="REP_ORDER_ITEMS">
+                <ScalarProperty Name="IsAlwaysReady" ColumnName="OUT_KITCHEN_PROCESS" />
+                <ScalarProperty Name="IsCancelled" ColumnName="IS_CANCELLED" />
+                <ScalarProperty Name="ServeDatetime" ColumnName="SERVE_DATETIME" />
+                <ScalarProperty Name="StopDatetime" ColumnName="STOP_PROCESS_DATETIME" />
+                <ScalarProperty Name="StartDatetime" ColumnName="START_PROCESS_DATETIME" />
+                <ScalarProperty Name="CreateDatetime" ColumnName="CREATE_DATETIME" />
+                <ScalarProperty Name="State" ColumnName="STATE" />
+                <ScalarProperty Name="Quantity" ColumnName="QUANTITY" />
+                <ScalarProperty Name="UnitPrice" ColumnName="PRICE" />
+                <ScalarProperty Name="UnitName" ColumnName="UNIT" />
+                <ScalarProperty Name="ProductGroup" ColumnName="ITEM_GROUP" />
+                <ScalarProperty Name="ProductName" ColumnName="ITEM_NAME" />
+                <ScalarProperty Name="ProductCode" ColumnName="ITEM_CODE" />
+                <ScalarProperty Name="Sequence" ColumnName="SEQUENCE" />
+                <ScalarProperty Name="ReportCounter" ColumnName="REPORT_COUNTER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REPORTS">
+            <EntityTypeMapping TypeName="XRMSModel.ReportOrderEntity">
+              <MappingFragment StoreEntitySet="REPORTS">
+                <ScalarProperty Name="CancelReason" ColumnName="CANCEL_REASON" />
+                <ScalarProperty Name="IsCancelled" ColumnName="IS_CANCELLED" />
+                <ScalarProperty Name="PrintCount" ColumnName="PRINT_COUNT" />
+                <ScalarProperty Name="Change" ColumnName="CHANGE" />
+                <ScalarProperty Name="Cash" ColumnName="CASH" />
+                <ScalarProperty Name="SpecialDiscount" ColumnName="SPECIAL_DISCOUNT" />
+                <ScalarProperty Name="DiscountPrice" ColumnName="DISCOUNT_PRICE" />
+                <ScalarProperty Name="DiscountPercent" ColumnName="DISCOUNT_PERCENT" />
+                <ScalarProperty Name="VatPrice" ColumnName="VAT_PRICE" />
+                <ScalarProperty Name="VatEnable" ColumnName="VAT_ENABLE" />
+                <ScalarProperty Name="ServiceCharge" ColumnName="SERVICE_CHARGE" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TOTAL_PRICE" />
+                <ScalarProperty Name="SubTotalPrice" ColumnName="SUB_TOTAL_PRICE" />
+                <ScalarProperty Name="CheckoutDatetime" ColumnName="CHECKOUT_TIME" />
+                <ScalarProperty Name="BillDatetime" ColumnName="BILL_TIME" />
+                <ScalarProperty Name="EditDatetime" ColumnName="EDIT_TIME" />
+                <ScalarProperty Name="OrderDatetime" ColumnName="ORDER_TIME" />
+                <ScalarProperty Name="State" ColumnName="STATE" />
+                <ScalarProperty Name="CreatorName" ColumnName="WAITER" />
+                <ScalarProperty Name="TableName" ColumnName="TABLE_NAME" />
+                <ScalarProperty Name="TableCode" ColumnName="TABLE_CODE" />
+                <ScalarProperty Name="Code" ColumnName="ORDER_CODE" />
+                <ScalarProperty Name="Id" ColumnName="ORDER_ID" />
+                <ScalarProperty Name="ReportCounter" ColumnName="REPORT_COUNTER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RestaurantEntities">
+            <EntityTypeMapping TypeName="XRMSModel.RestaurantEntity">
+              <MappingFragment StoreEntitySet="RESTAURANT_INFO">
+                <ScalarProperty Name="LogoPath" ColumnName="LOGO_PATH" />
+                <ScalarProperty Name="Email" ColumnName="EMAIL" />
+                <ScalarProperty Name="Website" ColumnName="WEBSITE" />
+                <ScalarProperty Name="PhoneNumber3" ColumnName="PHONE_3" />
+                <ScalarProperty Name="PhoneNumber2" ColumnName="PHONE_2" />
+                <ScalarProperty Name="PhoneNumber1" ColumnName="PHONE_1" />
+                <ScalarProperty Name="Address" ColumnName="ADDRESS" />
+                <ScalarProperty Name="Name" ColumnName="NAME" />
+                <ScalarProperty Name="Id" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportMaterialEntities">
+            <EntityTypeMapping TypeName="XRMSModel.ReportMaterialEntity">
+              <MappingFragment StoreEntitySet="REP_MATERIALS">
+                <ScalarProperty Name="UnitName" ColumnName="UNIT" />
+                <ScalarProperty Name="Amount" ColumnName="AMOUNT" />
+                <ScalarProperty Name="MaterialName" ColumnName="MATERIAL_NAME" />
+                <ScalarProperty Name="MaterialCode" ColumnName="MATERIAL_CODE" />
+                <ScalarProperty Name="OrderItemSequence" ColumnName="ITEM_SEQUENCE" />
+                <ScalarProperty Name="ReportCounter" ColumnName="REPORT_COUNTER" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

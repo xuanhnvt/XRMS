@@ -1,0 +1,157 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" >
+
+
+    <!-- Brushes : These are used to define the color for background, foreground, selection, enabled etc of all controls
+	If you want to change the color of a control you can just chnage the brush; if you want to add a new shape or change arrangement then also edit the template -->
+    
+    <!-- The Background Brush is used as the background for the Headers, Footers, Windows ... -->
+    <SolidColorBrush x:Key="HeaderBackgroundBrush" Color="#FF202020" />
+    <SolidColorBrush x:Key="FooterBackgroundBrush" Color="#FF202020" />
+
+    <!-- This is a color setting for text -->
+    <SolidColorBrush x:Key="WindowFontColor" Color="#FFE6E6E6" />
+    <SolidColorBrush x:Key="ControlFontColor" Color="#FFE6E6E6" />
+    <SolidColorBrush x:Key="HeaderFontColor" Color="#FFE6E6E6" />
+    <SolidColorBrush x:Key="FooterFontColor" Color="#FFE6E6E6" />
+    <SolidColorBrush x:Key="ListViewFontColor" Color="#FFFA6E15" />
+
+    <!-- The WindowBackgroundBrush and WindowBorderBrush is used as the background and border for most windows -->
+    <LinearGradientBrush x:Key="WindowBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#FFCCE6B6" Offset="0"/>
+        <GradientStop Color="#FF468016" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="WindowBorderBrush" Color="Black"/>
+    
+    <!-- The PanelBackgroundBrush and PanelBorderBrush is used as the background and border for the panels
+    such as the Canvas, WrapPanel, StackPanel, DockPanel, Grid -->
+    <LinearGradientBrush x:Key="PanelBackgroundBrush" EndPoint="1,0.5" StartPoint="0,0.5">
+        <GradientStop Color="#FF555555" Offset="0" />
+        <GradientStop Color="#FF1C1C1C" Offset="1" />
+    </LinearGradientBrush>
+    <!--LinearGradientBrush x:Key="PanelBackgroundBrush" EndPoint="1,0.5" StartPoint="0,0.5">
+        <GradientStop Color="#FF2C1308" Offset="0" />
+        <GradientStop Color="#FF8F400A" Offset="1" />
+    </LinearGradientBrush-->
+    <SolidColorBrush x:Key="PanelBorderBrush" Color="White"/>
+
+    <!-- The ContainerBackgroundBrush and ContainerBorderBrush is used as the background and border for content areas
+    such as ScrollViewer, TreeView, ListBox, Expander, TextBox, PasswordBox, RichTextBox, Tab Control -->
+    <LinearGradientBrush x:Key="ContainerBackgroundBrush" EndPoint="0.501,0.039" StartPoint="0.501,0.971">
+        <GradientStop Color="#FF555555" Offset="0" />
+        <GradientStop Color="#FF1C1C1C" Offset="1" />
+    </LinearGradientBrush>
+    <!--LinearGradientBrush x:Key="ContainerBackgroundBrush" EndPoint="0.501,0.039" StartPoint="0.501,0.971">
+        <GradientStop Color="#FF2C1308" Offset="0" />
+        <GradientStop Color="#FF8F400A" Offset="1" />
+    </LinearGradientBrush-->
+    <SolidColorBrush x:Key="ContainerBorderBrush" Color="Black"/>
+
+    <!-- The ControlBackgroundBrush and ControlBorderBrush is used as the background and border for some controls
+    such as Button, RadioButton, CheckBox, ComboBoxItem, MenuItem, TreeViewItem, RepeatButton -->
+    <LinearGradientBrush x:Key="ControlBackgroundBrush" EndPoint="0.501,0.039" StartPoint="0.501,0.971">
+        <GradientStop Color="#FF1F317D" Offset="0.101" />
+        <GradientStop Color="#FF1F317D" Offset="0.49" />
+        <GradientStop Color="#FF6C8EBD" Offset="0.51" />
+        <GradientStop Color="#FF283D8C" Offset="0" />
+        <GradientStop Color="#FF7094C7" Offset="0.986" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="ControlBorderBrush" Color="Black"/>
+
+    <!-- MouseOverBackgroundBrush is used for MouseOver in Button, Radio Button, CheckBox, ComboBoxItem, MenuItem, TreeViewItem, RepeatButton -->
+    <LinearGradientBrush x:Key="MouseOverBackgroundBrush" EndPoint="0.5,1" StartPoint="0.5,0">
+        <GradientStop Color="#00000000" Offset="1"/>
+        <GradientStop Color="#4BFFFFFF" Offset="0"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="MouseOverBorderBrush" Color="#7FFFFFFF"/>
+
+    <!-- PressedBackgroundBrush and PressedBorderBrush is used for Pressed in Button, Radio Button, CheckBox -->
+    <LinearGradientBrush x:Key="PressedBackgroundBrush" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#BBB" Offset="0.0"/>
+        <GradientStop Color="#EEE" Offset="0.1"/>
+        <GradientStop Color="#EEE" Offset="0.9"/>
+        <GradientStop Color="#FFF" Offset="1.0"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="PressedBorderBrush" Color="#7FFFFFFF"/>
+
+    <!-- SelectedBackgroundBrush and SelectedBorderBrush is used for the Selected item in MenuItem, ListViewItem, ListBoxItem, ComboBoxItem-->
+    <LinearGradientBrush x:Key="SelectedBackgroundBrush" EndPoint="1,0.5" StartPoint="0,0.5">
+        <GradientStop Color="#CCFF6D00" Offset="0.9" />
+        <GradientStop Color="#CCFF6D66" Offset="0.1" />
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="SelectedBorderBrush" Color="#7FFFFFFF"/>
+
+    <!-- KeyboardFocusedBorderBrush is used to show KeyBoardFocus -->
+    <LinearGradientBrush x:Key="KeyboardFocusedBorderBrush" EndPoint="0,1" StartPoint="0,0">
+        <GradientStop Color="#FFF00808" Offset="0.0" />
+        <GradientStop Color="#FFB91E1E" Offset="1.0" />
+    </LinearGradientBrush>
+
+    <!-- Disabled Brushes are used for the Disabled look of each control -->
+    <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888"/>
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#EEE"/>
+    <SolidColorBrush x:Key="DisabledBorderBrush" Color="#AAA"/>
+
+    <!-- Used for Checkmark, Radio button, TreeViewItem, Expander ToggleButton glyphs -->
+    <SolidColorBrush x:Key="GlyphBrush" Color="#444"/>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <LinearGradientBrush x:Key="TextBoxBorderBrush" EndPoint="0,20" StartPoint="0,0" MappingMode="Absolute">
+        <GradientStop Color="#ABADB3" Offset="0.05"/>
+        <GradientStop Color="#E2E3EA" Offset="0.07"/>
+        <GradientStop Color="#E3E9EF" Offset="1"/>
+    </LinearGradientBrush>
+
+    <!-- Restaurant Data Brushes -->
+    <SolidColorBrush x:Key="RestaurantDataFontColor" Color="#FFFFFFFF" />
+
+    <LinearGradientBrush x:Key="SelectedHeaderBackgroundBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#D4273D5C" Offset="0" />
+        <GradientStop Color="#D4273D5C" Offset="0.5" />
+        <GradientStop Color="#D44F5E8E" Offset="1" />
+    </LinearGradientBrush>
+
+    <SolidColorBrush x:Key="GridViewHeaderFontColor" Color="#FFFFFFFF" />
+    <SolidColorBrush x:Key="GridViewSelectedHeaderFontColor" Color="#FFFFFFFF" />
+
+    <SolidColorBrush x:Key="DiagramToolTipBackgroundBrush" Color="#FF202020" />
+    <Geometry x:Key="DownArrowGeometry">M 0 0 L 3.5 4 L 7 0 Z</Geometry>
+
+    <!-- This brush is used when the person does not have a primary photo -->
+    <DrawingBrush x:Key="NoPhotoBrush">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Geometry="M 126.889,143.333L 250.889,143.333L 250.889,267.333L 126.889,267.333L 126.889,143.333 Z ">
+                    <GeometryDrawing.Brush>
+                        <LinearGradientBrush StartPoint="0,0.0215053" EndPoint="1,1">
+                            <GradientStop Color="#FFFFFFFF" Offset="0.00847458" />
+                            <GradientStop Color="#FF949063" Offset="0.800847" />
+                        </LinearGradientBrush>
+                    </GeometryDrawing.Brush>
+                </GeometryDrawing>
+                <GeometryDrawing Brush="#FF85825F" Geometry="F1 M 162.428,200.167C 162.428,184.671 175.003,172.085 190.509,172.085C 206.005,172.085 218.591,184.671 218.591,200.167C 218.591,215.683 206.005,228.249 190.509,228.249C 175.003,228.249 162.428,215.683 162.428,200.167 Z " />
+                <GeometryDrawing Brush="#FF524F40" Geometry="F1 M 160.598,199.025C 160.598,183.529 173.174,170.943 188.68,170.943C 204.176,170.943 216.762,183.529 216.762,199.025C 216.762,214.541 204.176,227.107 188.68,227.107C 173.174,227.107 160.598,214.541 160.598,199.025 Z " />
+                <GeometryDrawing Brush="#FF6D6B51" Geometry="F1 M 253.277,270.359C 250.065,261.438 253.089,268.956 244.895,249.789C 242.347,243.406 234.03,235.753 223.176,235.753L 163.176,235.753C 152.342,235.753 144.025,243.406 141.488,249.789C 138.94,256.153 135.803,261.438 132.631,270.359" />
+                <GeometryDrawing Brush="#FF524F40" Geometry="F1 M 249.41,266.847C 246.198,257.926 249.222,265.444 241.028,246.278C 238.48,239.894 230.163,232.241 219.309,232.241L 159.309,232.241C 148.475,232.241 140.158,239.894 137.621,246.278C 135.074,252.641 131.936,257.926 128.764,266.847" />
+                <GeometryDrawing Brush="#FFFFFFFF" Geometry="M 115.999,132.639L 260.777,132.639L 260.777,301.028L 115.999,301.028L 115.999,132.639 Z M 126.208,142.884L 250.208,142.884L 250.208,266.884L 126.208,266.884L 126.208,142.884 Z ">
+                    <GeometryDrawing.Pen>
+                        <Pen LineJoin="Round" Brush="#FFC0C1C3" />
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+</ResourceDictionary>

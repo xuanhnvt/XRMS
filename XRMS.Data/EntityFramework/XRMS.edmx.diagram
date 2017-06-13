@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a8ec73bf0ef74df88b20d1223ed40f94" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="XRMSModel.AreaEntity" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="XRMSModel.TableEntity" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="XRMSModel.UserEntity" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="XRMSModel.FK_TABLES_AREAS" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="XRMSModel.UserRoleEntity" Width="1.5" PointX="0.75" PointY="8" />
+        <AssociationConnector Association="XRMSModel.FK_USERS_PERMISSIONS" />
+        <EntityTypeShape EntityType="XRMSModel.ProductGroupEntity" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="XRMSModel.ProductEntity" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="XRMSModel.UnitEntity" Width="1.5" PointX="5.375" PointY="4.75" />
+        <EntityTypeShape EntityType="XRMSModel.MaterialGroupEntity" Width="1.5" PointX="7.375" PointY="1.5" />
+        <EntityTypeShape EntityType="XRMSModel.MaterialEntity" Width="1.5" PointX="9.625" PointY="1" />
+        <AssociationConnector Association="XRMSModel.FK_MATERIALS_MATERIAL_GROUPS" />
+        <EntityTypeShape EntityType="XRMSModel.RecipeItemEntity" Width="1.5" PointX="11.875" PointY="1.5" />
+        <AssociationConnector Association="XRMSModel.FK_RECIPES_MATERIALS" />
+        <AssociationConnector Association="XRMSModel.FK_RECIPES_PRODUCTS" />
+        <EntityTypeShape EntityType="XRMSModel.OrderItemEntity" Width="1.5" PointX="12.5" PointY="4.875" />
+        <EntityTypeShape EntityType="XRMSModel.OrderEntity" Width="1.5" PointX="8.25" PointY="5" />
+        <EntityTypeShape EntityType="XRMSModel.CodeDefinitionEntity" Width="1.5" PointX="3.375" PointY="7.75" />
+        <AssociationConnector Association="XRMSModel.FK_ORDER_ITEMS_ORDERS" />
+        <AssociationConnector Association="XRMSModel.FK_ORDER_ITEMS_PRODUCTS" />
+        <AssociationConnector Association="XRMSModel.FK_ORDERS_TABLES" />
+        <AssociationConnector Association="XRMSModel.FK_ORDERS_USERS" />
+        <EntityTypeShape EntityType="XRMSModel.MaterialLogEntity" Width="1.5" PointX="11.875" PointY="22.375" />
+        <EntityTypeShape EntityType="XRMSModel.ReportEventEntity" Width="1.5" PointX="12.625" PointY="18.75" />
+        <EntityTypeShape EntityType="XRMSModel.ReportOrderEditionEntity" Width="1.5" PointX="12.625" PointY="15.625" />
+        <EntityTypeShape EntityType="XRMSModel.ReportOrderItemEditionEntity" Width="1.5" PointX="14.875" PointY="15.375" />
+        <EntityTypeShape EntityType="XRMSModel.ReportOrderItemEntity" Width="1.5" PointX="12.625" PointY="10.375" />
+        <EntityTypeShape EntityType="XRMSModel.ReportOrderEntity" Width="1.5" PointX="10.375" PointY="6.25" />
+        <EntityTypeShape EntityType="XRMSModel.RestaurantEntity" Width="1.5" PointX="5.375" PointY="7.75" />
+        <EntityTypeShape EntityType="XRMSModel.ReportMaterialEntity" Width="1.5" PointX="14.875" PointY="11.25" />
+        <AssociationConnector Association="XRMSModel.FK_MATERIAL_LOGS_MATERIALS" />
+        <AssociationConnector Association="XRMSModel.FK_REP_EVENTS_REPORTS" />
+        <AssociationConnector Association="XRMSModel.FK__REP_ORDER__REPOR__12149A71" />
+        <AssociationConnector Association="XRMSModel.FK_REP_ORDER_ITEM_EDITIONS_REP_ORDER_EDITIONS" />
+        <AssociationConnector Association="XRMSModel.FK_REP_MATERIALS_REP_ORDER_ITEMS" />
+        <AssociationConnector Association="XRMSModel.FK_REP_ORDER_ITEMS_REPORTS" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,24 @@
+List of Issue must to be fixed later
+1. Add id of user that create order (temporarily: set CreatorId = 1)
+2. Table status list not update after refresh list
+3. Insert event: need information of user do action (temporarily use CreatorUser that create order)
+4. Insert 2 event before commit get error (in OrderManager.Update, because event repository can not get last
+event counter of unsaved event) (temporarily solution: use 2 commit, each of them for inserting one event)
+5. Unit of work use in-memory data when access database, so it make some data not update although database is affected
+6. Use code block using for creating DbContext and make query inside, but error DbContext has been disposed, can not complete
+the operation
+7. OrderCashier screen refresh lost order item of selected order
+8. Create SystemUser for entire program (later need create login window to read SystemUser)
+9. Problem with lock order, try to make it run (modify it later for better)
+10. FilterTextBox break MVVM model, View include namespace of Models (fix later)
+11. Add label show how many order item was cancelled next by CheckBox Show Cancelled Product
+12. Screen edit order: isDirty of each item problem, not update to false when user edit back to original data.
+13. Define which properties need use csla framework (managed properties), which need use normal property. (Now all properties use csla)
+14. Cashier Screen: Execute select DiscountPercent when user select another item. (It save data, actually no need this step in this situation)
+15. Modify keypad layout later.
+16. Open order, order is lock, but when closing order popup using close window button, order is not unlocked. Please check.
+17. Check login screen: view + viewmodel. Modify later, now just try to make it run.
+18. ViewAwareStatusService_ViewLoaded in MainViewModel can not load CashierOrdersView at startup. Add this view into constructor method.
+19. Add logout button, it will come back login screen.
+20. Login screen can not use, exclude it from project, fix later.
+21. xaml designer need connection string of ef

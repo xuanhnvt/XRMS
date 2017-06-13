@@ -1,0 +1,265 @@
+﻿<Window x:Class="XRMS.Presentation.Popups.OrderPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XRMS.Presentation.Popups"
+        mc:Ignorable="d"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:Cinch="clr-namespace:Cinch;assembly=Cinch.WPF"
+        xmlns:UserControls="clr-namespace:XRMS.Presentation.UserControls"
+        xmlns:DependencyProperties="clr-namespace:XRMS.Presentation.DependencyProperties"
+        WindowStartupLocation="CenterOwner"
+        Title="Product View" Height="Auto" Width="1000"
+        Background="{DynamicResource PageBackgroundBrush}"
+        Foreground="{DynamicResource PageForegroundBrush}"
+        ResizeMode="NoResize">
+    <Window.Resources>
+        <DataTemplate x:Key="IsDirtyColumnTemplate">
+            <Grid Width="30">
+                <!--Image Source="../Images/Editting.ico" VerticalAlignment="Center" Margin="0,0,0,0" Width="14" Height="14" Visibility="{Binding IsEditting, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=true, Mode=OneWay}"/-->
+                <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Stretch" TextAlignment="Center" Visibility="{Binding IsDirty, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=true, Mode=OneWay}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              Background="{DynamicResource PageBackgroundBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"
+                        Background="{DynamicResource PageHeaderPanelBackgroundBrush}">
+                <Image Source="../Images/Table.png" 
+                       Width="36" Height="36"
+                       Margin="10,0,0,0"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="{Binding DisplayName}"
+                       Margin="10,0,0,0"
+                       Style="{DynamicResource LabelPageHeaderStyle}"/>
+            </StackPanel>
+
+            <!--Rectangle Grid.Row="1"
+                       Height="2"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                       Fill="{DynamicResource PageForegroundBrush}"/-->
+        </Grid>
+        <Grid Grid.Row="1" IsEnabled="{Binding Item.LockState, Converter={StaticResource InverseBooleanConverter}}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0"
+                    Margin="0,5,5,5"
+                    Background="{DynamicResource SectionBackgroundBrush}"
+                    BorderBrush="{DynamicResource SectionForegroundBrush}"
+                    BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0" HorizontalAlignment="Stretch" Background="{DynamicResource SectionHeaderPanelBackgroundBrush}">
+                        <Label Content="Search:"
+                               Style="{DynamicResource LabelSectionHeaderStyle}"
+                               Margin="5,5,5,5" Height="Auto" Width="70"/>
+                        <UserControls:FilterTextUserControl x:Name="FilterTextBox"
+                                    Margin="75,0,0,0" Width="130"
+                                    HorizontalAlignment="Left" VerticalAlignment="Center">
+                        </UserControls:FilterTextUserControl>
+                        <Label Content="Group:"
+                               Style="{DynamicResource LabelSectionHeaderStyle}"
+                               Margin="5,5,110,5" Height="Auto" Width="65"
+                               HorizontalAlignment="Right"/>
+                        <ComboBox x:Name="ComboBoxOfGroupList" Margin="5,5,5,5" Width="100" Height="Auto"
+                                   HorizontalAlignment="Right" VerticalAlignment="Center"
+                                   ItemsSource="{Binding Path=ProductGroupList}" 
+                                   DisplayMemberPath="Name">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding SelectProductGroupCommand}"
+                                                           CommandParameter="{Binding ElementName=ComboBoxOfGroupList, Path=SelectedItem}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                    </Grid>
+
+                    <ListView x:Name="ListViewOfAvailableProducts" Grid.Row="1"
+                              ItemsSource="{Binding AvailableProductList}" SelectedItem="{Binding SelectedProduct}"
+                                  Margin="0,0,0,5" Width="Auto" Height="Auto"
+                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                  Background="Transparent"
+                                  BorderBrush="Transparent" BorderThickness="2" Opacity="1"
+                                  IsSynchronizedWithCurrentItem="True"
+                                  SelectionMode="Single"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding SelectProductCommand}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="150" 
+                                                DisplayMemberBinding="{Binding Path=Name}"/>
+                                <GridViewColumn Header="Unit" Width="60" 
+                                                DisplayMemberBinding="{Binding Path=Unit.Name}"/>
+                                <GridViewColumn Header="Price" Width="100"
+                                                DisplayMemberBinding="{Binding Path=Price}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+
+                    <!--Rectangle Grid.Row="2" Height="2"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                       Fill="{DynamicResource SectionForegroundBrush}"/-->
+
+                    <Grid Grid.Row="3">
+                        <Button Content="Add"
+                                Margin="0,5,0,5" Width="90" Height="30"
+                                Command="{Binding AddOrderItemCommand}"
+                                CommandParameter="{Binding ElementName=ListViewOfAvailableProducts, Path=SelectedItem}"/>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border Grid.Column="1"
+                    Margin="0,5,0,5"
+                    Background="{DynamicResource SectionBackgroundBrush}"
+                    BorderBrush="{DynamicResource SectionForegroundBrush}"
+                    BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" Background="{DynamicResource SectionHeaderPanelBackgroundBrush}">
+                        <Label Content="Order:"
+                               Style="{DynamicResource LabelSectionHeaderStyle}"
+                               Margin="5,5,5,5" Width="60" Height="Auto"/>
+                        <Label Content="{Binding Path=Item.Code}"
+                               Style="{DynamicResource LabelValueOnHeaderStyle}"
+                               Margin="0,5,0,5" Width="100" Height="Auto"/>
+                        <Label Content="Table:"
+                               Style="{DynamicResource LabelSectionHeaderStyle}"
+                               Margin="10,5,0,5" Width="60" Height="Auto"/>
+                        <ComboBox Margin="0,5,0,5" Width="100" Height="Auto"
+                                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                                   HorizontalContentAlignment="Left" VerticalContentAlignment="Center"
+                                   ItemsSource="{Binding Path=FreeTableList}" 
+                                   DisplayMemberPath="Name"
+                                   SelectedValuePath="Id"
+                                   IsSynchronizedWithCurrentItem="True"
+                                  SelectedValue="{Binding Path=Item.TableId}"/>
+                        <StackPanel Margin="20,5,0,5" Orientation="Horizontal">
+                            <Grid Margin="0,0,0,0" Width="15">
+                                <CheckBox Command="{Binding ShowCancelledProductCommand}" HorizontalAlignment="Center" VerticalAlignment="Center" IsChecked="{Binding IsShowCancelledProduct}"/>
+                            </Grid>
+                            <TextBlock Text="Show Cancelled Products"
+                                       Style="{DynamicResource TextSectionHeaderStyle}"
+                                       Margin="2,0,0,0" Width="Auto"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <ListView x:Name="ListViewOfOrderItems" Grid.Row="1"
+                            ItemsSource="{Binding Item.OrderItems}" SelectedItem="{Binding SelectedOrderItem}"
+                                  Margin="0,0,0,5" Width="Auto" Height="Auto"
+                                  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                  Background="Transparent"
+                                  BorderBrush="Transparent" BorderThickness="2" Opacity="1"
+                                  IsSynchronizedWithCurrentItem="True"
+                                  SelectionMode="Single"
+                                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                                  ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header=""
+                                                CellTemplate="{StaticResource IsDirtyColumnTemplate}"
+                                                Width="30"/>
+                                <GridViewColumn Header="Name"
+                                                Width="150">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="{Binding Path=State, Converter={StaticResource OrderItemStateConverter}, Mode=Default}" VerticalAlignment="Center" Margin="0,0,0,0" Width="14" Height="14" />
+                                                <TextBlock Text="{Binding Path=ProductInfo.Name}" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                <GridViewColumn Header="Unit"
+                                                DisplayMemberBinding="{Binding Path=ProductInfo.Unit.Name}"
+                                                Width="60" />
+                                <GridViewColumn Header="Current Quantity" Width="100"
+                                                DisplayMemberBinding="{Binding Path=OldQuantity}"/>
+                                <GridViewColumn Header="Editted" Width="55"
+                                                DisplayMemberBinding="{Binding Path=EdittedQuantity}"/>
+                                <GridViewColumn Header="Updated Quantity" Width="105"
+                                                DisplayMemberBinding="{Binding Path=Quantity}"/>
+                                <GridViewColumn Header="State"
+                                                DisplayMemberBinding="{Binding Path=State}"
+                                                Width="80"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+
+                    <!--Rectangle Grid.Row="2" Height="2"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                       Fill="{DynamicResource SectionForegroundBrush}"/-->
+
+                    <Grid Grid.Row="3">
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                            <Button Content="Cancel Item"
+                                    Margin="10,5,0,5" Width="90" Height="30"
+                                    Command="{Binding CancelOrderItemCommand}"
+                                    CommandParameter="{Binding ElementName=ListViewOfOrderItems, Path=SelectedItem}"
+                                    Visibility="{Binding ElementName=ListViewOfOrderItems, Path=SelectedItem.IsCancelled, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=false}"/>
+                                <Button Content="Undo Cancel"
+                                    Margin="10,5,0,5" Width="90" Height="30"
+                                    Command="{Binding UnCancelOrderItemCommand}"
+                                    CommandParameter="{Binding ElementName=ListViewOfOrderItems, Path=SelectedItem}"
+                                    Visibility="{Binding ElementName=ListViewOfOrderItems, Path=SelectedItem.IsCancelled, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=true}"/>
+                            </Grid>
+                            <Button Content="+"
+                                    Margin="10,5,0,5" Width="90" Height="30"
+                                    Command="{Binding IncreaseQuantityCommand}"
+                                    CommandParameter="{Binding ElementName=ListViewOfOrderItems, Path=SelectedItem}"/>
+                            <Button Content="-"
+                                    Margin="10,5,0,5" Width="90" Height="30"
+                                    Command="{Binding DecreaseQuantityCommand}"
+                                    CommandParameter="{Binding ElementName=ListViewOfOrderItems, Path=SelectedItem}"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2" Background="{DynamicResource SectionFooterPanelBackgroundBrush}">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="Save"
+                        Margin="0,5,0,5" Width="90" Height="30"
+                        Command="{Binding SaveCommand}"/>
+                <Button Content="Cancel"
+                        Margin="10,5,0,5" Width="90" Height="30"
+                        Command="{Binding CancelCommand}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

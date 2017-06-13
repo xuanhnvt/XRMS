@@ -1,0 +1,78 @@
+﻿<Window x:Class="XRMS.Presentation.Popups.KeyPadPopup"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:XRMS.Presentation.Popups"
+        mc:Ignorable="d"
+        Title="Keypad"
+        Height="340" Width="400" WindowStartupLocation="CenterScreen" KeyDown="Window_KeyDown">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              Background="Black">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Stretch">
+                <Image Source="../Images/Keypad.ico" 
+                       Width="36" Height="36"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Label Content="{Binding InputName}"
+                       Margin="10,0,0,0"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"
+                       FontWeight="Bold" Foreground="Orange" FontSize="18"/>
+            </StackPanel>
+
+            <Rectangle Grid.Row="1"
+                       Height="2"
+                       HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                       Fill="Black"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" x:Name="txbValue" Text="0" FontSize="20" KeyDown="txbValue_KeyDown"/>
+            <Button Grid.Row="0" Grid.Column="3" x:Name="btnNumberBack" Content="BACKSPACE" Click="btnNumberBack_Click"/>
+
+            <Button Grid.Row="1" Grid.Column="0" x:Name="btnNumber7" Content="7" Click="btnNumber7_Click"/>
+            <Button Grid.Row="1" Grid.Column="1" x:Name="btnNumber8" Content="8" Click="btnNumber8_Click"/>
+            <Button Grid.Row="1" Grid.Column="2" x:Name="btnNumber9" Content="9" Click="btnNumber9_Click"/>
+            <Button Grid.Row="1" Grid.Column="3" x:Name="btnClear" Content="CLEAR" Click="btnClear_Click"/>
+
+            <Button Grid.Row="2" Grid.Column="0" x:Name="btnNumber4" Content="4" Click="btnNumber4_Click"/>
+            <Button Grid.Row="2" Grid.Column="1" x:Name="btnNumber5" Content="5" Click="btnNumber5_Click"/>
+            <Button Grid.Row="2" Grid.Column="2" x:Name="btnNumber6" Content="6" Click="btnNumber6_Click"/>
+            <Button Grid.Row="2" Grid.Column="3" x:Name="btnNumber000" Content="000" Click="btnNumber000_Click"/>
+
+            <Button Grid.Row="3" Grid.Column="0" x:Name="btnNumber1" Content="1" Click="btnNumber1_Click"/>
+            <Button Grid.Row="3" Grid.Column="1" x:Name="btnNumber2" Content="2" Click="btnNumber2_Click"/>
+            <Button Grid.Row="3" Grid.Column="2" x:Name="btnNumber3" Content="3" Click="btnNumber3_Click"/>
+            <Button Grid.Row="3" Grid.Column="3" Grid.RowSpan="2" x:Name="btnEnter" Content="ENTER" Click="btnEnter_Click"/>
+
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" x:Name="btnNumber0" Content="0" Click="btnNumber0_Click"/>
+            <Button Grid.Row="4" Grid.Column="2" x:Name="btnDot" Content="." Height="50" VerticalAlignment="Top" Click="btnDot_Click"/>
+
+        </Grid>
+    </Grid>
+</Window>
