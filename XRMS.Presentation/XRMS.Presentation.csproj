@@ -9,11 +9,12 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XRMS.Presentation</RootNamespace>
     <AssemblyName>XRMS.Presentation</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -40,7 +41,7 @@
       <HintPath>..\Assemblies\Cinch.WPF.dll</HintPath>
     </Reference>
     <Reference Include="Csla">
-      <HintPath>..\..\..\..\..\SoftwareDevelopment\Platforms\DotNet\WPF\SampleProject\1. MVVM Framework\csla-4.6.500\Bin\Debug\NET4\Csla.dll</HintPath>
+      <HintPath>..\Assemblies\Csla.dll</HintPath>
     </Reference>
     <Reference Include="Csla.CustomFieldData">
       <HintPath>..\Assemblies\Csla.CustomFieldData.dll</HintPath>
@@ -131,6 +132,7 @@
     <Compile Include="ValueConverters\TableStateConverter.cs" />
     <Compile Include="ViewModels\CashierOrdersViewModel.cs" />
     <Compile Include="ViewModels\KeyPadViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MaterialGroupListViewModel.cs" />
     <Compile Include="ViewModels\MaterialGroupViewModel.cs" />
     <Compile Include="ViewModels\MaterialListViewModel.cs" />
@@ -147,6 +149,9 @@
     <Compile Include="ViewModels\UnitViewModel.cs" />
     <Compile Include="Views\CashierOrdersView.xaml.cs">
       <DependentUpon>CashierOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MaterialsManagementView.xaml.cs">
       <DependentUpon>MaterialsManagementView.xaml</DependentUpon>
@@ -240,6 +245,10 @@
     <Page Include="Views\CashierOrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -357,6 +366,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Profile.ico" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Textures\chrome.jpg" />
+    <Resource Include="Images\Textures\Refresh.ico" />
+    <Resource Include="Images\Textures\Restaurant.jpg" />
+    <Resource Include="Images\Textures\wood.jpg" />
+    <Resource Include="Images\Textures\woodGold.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

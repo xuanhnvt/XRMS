@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XRMS.Business</RootNamespace>
     <AssemblyName>XRMS.Business</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,8 +37,9 @@
     <Reference Include="Cinch.WPF">
       <HintPath>..\Assemblies\Cinch.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Csla">
-      <HintPath>..\..\..\..\..\SoftwareDevelopment\Platforms\DotNet\WPF\SampleProject\1. MVVM Framework\csla-4.6.500\Bin\Debug\NET4\Csla.dll</HintPath>
+    <Reference Include="Csla, Version=4.6.500.0, Culture=neutral, PublicKeyToken=93be5fdc093e4c30, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Assemblies\Csla.dll</HintPath>
     </Reference>
     <Reference Include="Csla.CustomFieldData">
       <HintPath>..\Assemblies\Csla.CustomFieldData.dll</HintPath>

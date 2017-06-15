@@ -13,6 +13,8 @@ the operation
 10. FilterTextBox break MVVM model, View include namespace of Models (fix later)
 11. Add label show how many order item was cancelled next by CheckBox Show Cancelled Product
 12. Screen edit order: isDirty of each item problem, not update to false when user edit back to original data.
+-> Fix: modify clsa framework (function MarkDirty(bool suppress) not notify property IsDirty)
+-> This is not good solution beacause need keep csla framework stable.
 13. Define which properties need use csla framework (managed properties), which need use normal property. (Now all properties use csla)
 14. Cashier Screen: Execute select DiscountPercent when user select another item. (It save data, actually no need this step in this situation)
 15. Modify keypad layout later.

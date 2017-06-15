@@ -18,7 +18,8 @@
         <DataTemplate x:Key="IsDirtyColumnTemplate">
             <Grid Width="30">
                 <!--Image Source="../Images/Editting.ico" VerticalAlignment="Center" Margin="0,0,0,0" Width="14" Height="14" Visibility="{Binding IsEditting, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=true, Mode=OneWay}"/-->
-                <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Stretch" TextAlignment="Center" Visibility="{Binding IsDirty, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=true, Mode=OneWay}"/>
+                <!--TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Stretch" TextAlignment="Center" Visibility="{Binding IsDirty, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=true, Mode=OneWay}"/-->
+                <CheckBox IsChecked="{Binding Path=IsDirty, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/>
             </Grid>
         </DataTemplate>
     </Window.Resources>
@@ -259,6 +260,8 @@
                 <Button Content="Cancel"
                         Margin="10,5,0,5" Width="90" Height="30"
                         Command="{Binding CancelCommand}"/>
+                <!--CheckBox IsChecked="{Binding Path=Item.IsDirty, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/-->
+
             </StackPanel>
         </Grid>
     </Grid>

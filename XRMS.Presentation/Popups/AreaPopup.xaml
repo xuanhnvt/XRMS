@@ -113,6 +113,8 @@
             <Button Content="Cancel"
                     Margin="10,5,0,5" Width="90" Height="30"
                     Command="{Binding CancelCommand}"/>
+
+            <!--CheckBox IsChecked="{Binding Path=Item.IsDirty, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="False"/-->
         </StackPanel>
     </Grid>
 </Window>

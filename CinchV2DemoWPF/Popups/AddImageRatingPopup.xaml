@@ -1,0 +1,66 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:CinchV2="clr-namespace:Cinch;assembly=Cinch.WPF"
+		xmlns:local="clr-namespace:CinchV2DemoWPF;assembly="
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+        x:Class="CinchV2DemoWPF.AddImageRatingPopup"
+        mc:Ignorable="d" 
+        Title="CinchV2 : WPF Demo app"  
+        Icon="/CinchV2DemoWPF;component/Images/CinchIcon.png"
+        Height="300" 
+        Width="500"
+        Background="{StaticResource verticalTabHeaderBackground}"
+        WindowStartupLocation="CenterOwner">
+
+
+
+
+    <Grid x:Name="grid">
+
+
+
+    	<Button Template="{StaticResource ResourceKey=GlassButton}" 
+			Content="Ok" HorizontalAlignment="Right" Height="25" Margin="0,0,97,8" 
+			VerticalAlignment="Bottom" Width="70" Foreground="White"
+			Command="{Binding SaveImageRatingCommand}"/>
+    	<Button Template="{StaticResource GlassButton}" IsCancel="True" HorizontalAlignment="Right" Height="25" Margin="0,0,11,8" VerticalAlignment="Bottom" Width="70" Foreground="White" Content="Cancel"/>
+    	<Label 	Content="Enter A Rating For The Image" 
+    		Style="{StaticResource selectedImageRatingTitleLabelStyle}"
+    		Margin="22,14.343,0,0" VerticalAlignment="Top" />
+    	<Label Content="You Rating:" 
+    		Style="{StaticResource selectedImageRatingLabelStyle}"
+    		Margin="22,61.862,0,0" VerticalAlignment="Top" />
+        <TextBox Height="26" Margin="92.777,61.919,0,0" TextWrapping="Wrap" 
+                 VerticalAlignment="Top" HorizontalAlignment="Left" Width="97"
+                 Text="{Binding ImageRating.DataValue, UpdateSourceTrigger=LostFocus, ValidatesOnDataErrors=True, ValidatesOnExceptions=True}"
+                 Style="{StaticResource ValidatingTextBox}"
+                        IsEnabled="{Binding ImageRating.IsEditable}">
+            <i:Interaction.Behaviors>
+                <CinchV2:TextBoxFocusBehavior IsUsingDataWrappers="true" />
+                <CinchV2:NumericTextBoxBehaviour/>
+            </i:Interaction.Behaviors>
+        </TextBox>
+
+
+
+
+            <Image x:Name="image" Margin="0,32.656,23,90"  HorizontalAlignment="Right" 
+				Width="134" Source="/CinchV2DemoWPF;component/Images/error.png" 
+                   Visibility="{Binding IsValid, 
+                        Converter={StaticResource boolToVisConv}, 
+                        ConverterParameter='false'}">
+			
+	    		<Image.Effect>
+	    			<DropShadowEffect Color="#7F979797" ShadowDepth="12" Opacity="0.5"/>
+	    		</Image.Effect>
+	    	</Image>
+
+
+
+
+
+    </Grid>
+</Window>

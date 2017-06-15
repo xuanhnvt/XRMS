@@ -54,19 +54,21 @@ namespace XRMS.Presentation.ViewModels
             this.messageBoxService = messageBoxService;
             this.DisplayName = "Main Window";
 
+            if (Designer.IsInDesignMode)
+                return;
+
             // add view
-            /*WorkspaceData workspace = new WorkspaceData(@"/CinchV2DemoWPF;component/Images/About.png",
+            WorkspaceData workspace = new WorkspaceData(@"/CinchV2DemoWPF;component/Images/About.png",
                     "CashierOrdersView", null, "Orders Management", false);
             Views.Add(workspace);
-            SetActiveWorkspace(workspace);*/
-
-            // user login successfully
-            //MainUser = GlobalObjects.SystemUser;
+            SetActiveWorkspace(workspace);
 
             _refreshingTimer = new DispatcherTimer();
             _refreshingTimer.Tick += new EventHandler(OnRefreshingData);
             _refreshingTimer.Interval = TimeSpan.FromMilliseconds(1000);
-            //_refreshingTimer.Start();
+            _refreshingTimer.Start();
+
+            ReadRestaurantInfo();
         }
         #endregion
 
@@ -146,8 +148,9 @@ namespace XRMS.Presentation.ViewModels
             return menu;*/
             List<CinchMenuItem> menu = new List<CinchMenuItem>();
 
-            //create the File Menu
+            // create the File Menu
             var miFile = new CinchMenuItem("File");
+            menu.Add(miFile);
 
             /*var miInfo = new CinchMenuItem("Restaurant Info")
             { IconUrl = @"..\Images\About.ico" };
@@ -166,102 +169,127 @@ namespace XRMS.Presentation.ViewModels
             });
             miFile.Children.Add(miExit);
 
-            menu.Add(miFile);
-
-            //create the Managements Menu
+            // create the Managements Menu
             var miManagement = new CinchMenuItem("Managements");
-
-            CinchMenuItem miTables = new CinchMenuItem("Tables");
-            miTables.Command = new SimpleCommand<object, object>((x) =>
-            {
-                WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Table.png",
-                    "TablesManagementView", null, "Tables Management", true);
-
-                WorkspaceData availableView = FindAvailableView(workspace);
-                if (availableView == null)
-                {
-                    Views.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-                else
-                {
-                    SetActiveWorkspace(availableView);
-                }
-            });
-            miManagement.Children.Add(miTables);
-
-            CinchMenuItem miProducts = new CinchMenuItem("Products");
-            miProducts.Command = new SimpleCommand<object, object>((x) =>
-            {
-                WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Table.png",
-                    "ProductsManagementView", null, "Products Management", true);
-                WorkspaceData availableView = FindAvailableView(workspace);
-                if (availableView == null)
-                {
-                    Views.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-                else
-                {
-                    SetActiveWorkspace(availableView);
-                }
-            });
-            miManagement.Children.Add(miProducts);
-
-            CinchMenuItem miMaterials = new CinchMenuItem("Materials");
-            miMaterials.Command = new SimpleCommand<object, object>((x) =>
-            {
-                WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Table.png",
-                    "MaterialsManagementView", null, "Materials Management", true);
-                WorkspaceData availableView = FindAvailableView(workspace);
-                if (availableView == null)
-                {
-                    Views.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-                else
-                {
-                    SetActiveWorkspace(availableView);
-                }
-            });
-            miManagement.Children.Add(miMaterials);
-
-            CinchMenuItem miCashierOrders = new CinchMenuItem("Cashier Orders");
-            miCashierOrders.Command = new SimpleCommand<object, object>((x) =>
-            {
-                WorkspaceData workspace = new WorkspaceData(@"/CinchV2DemoWPF;component/Images/About.png",
-                    "CashierOrdersView", null, "Orders Management", false);
-
-                WorkspaceData availableView = FindAvailableView(workspace);
-                if (availableView == null)
-                {
-                    Views.Add(workspace);
-                    SetActiveWorkspace(workspace);
-                }
-                else
-                {
-                    //this.messageBoxService.ShowInformation("CashierOrdersView");
-                    SetActiveWorkspace(availableView);
-                }
-            });
-            miManagement.Children.Add(miCashierOrders);
-
-            /*var miKitchen = new CinchMenuItem("Kitchen")
-            { IconUrl = @"..\Images\Search.png" };
-            miKitchen.Command = KitchenManagementCommand;
-            miManagement.Children.Add(miKitchen);
-
-            var miMaterials = new CinchMenuItem("Materials")
-            { IconUrl = @"..\Images\Search.png" };
-            miMaterials.Command = MaterialsManagementCommand;
-            miManagement.Children.Add(miMaterials);
-
-            var miUsers = new CinchMenuItem("Users")
-            { IconUrl = @"..\Images\Search.png" };
-            miUsers.Command = UsersManagementCommand;
-            miManagement.Children.Add(miUsers);*/
-
             menu.Add(miManagement);
+
+            switch ((Role) MainUser.RoleId)
+            {
+                case Role.Manager:
+                    {
+                        CinchMenuItem miTables = new CinchMenuItem("Tables");
+                        miTables.Command = new SimpleCommand<object, object>((x) =>
+                        {
+                            WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Table.png",
+                                "TablesManagementView", null, "Tables Management", true);
+
+                            WorkspaceData availableView = FindAvailableView(workspace);
+                            if (availableView == null)
+                            {
+                                Views.Add(workspace);
+                                SetActiveWorkspace(workspace);
+                            }
+                            else
+                            {
+                                SetActiveWorkspace(availableView);
+                            }
+                        });
+                        miManagement.Children.Add(miTables);
+
+                        CinchMenuItem miProducts = new CinchMenuItem("Products");
+                        miProducts.Command = new SimpleCommand<object, object>((x) =>
+                        {
+                            WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Table.png",
+                                "ProductsManagementView", null, "Products Management", true);
+                            WorkspaceData availableView = FindAvailableView(workspace);
+                            if (availableView == null)
+                            {
+                                Views.Add(workspace);
+                                SetActiveWorkspace(workspace);
+                            }
+                            else
+                            {
+                                SetActiveWorkspace(availableView);
+                            }
+                        });
+                        miManagement.Children.Add(miProducts);
+
+                        CinchMenuItem miMaterials = new CinchMenuItem("Materials");
+                        miMaterials.Command = new SimpleCommand<object, object>((x) =>
+                        {
+                            WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Table.png",
+                                "MaterialsManagementView", null, "Materials Management", true);
+                            WorkspaceData availableView = FindAvailableView(workspace);
+                            if (availableView == null)
+                            {
+                                Views.Add(workspace);
+                                SetActiveWorkspace(workspace);
+                            }
+                            else
+                            {
+                                SetActiveWorkspace(availableView);
+                            }
+                        });
+                        miManagement.Children.Add(miMaterials);
+
+                        CinchMenuItem miCashierOrders = new CinchMenuItem("Cashier Orders");
+                        miCashierOrders.Command = new SimpleCommand<object, object>((x) =>
+                        {
+                            WorkspaceData workspace = new WorkspaceData(@"/CinchV2DemoWPF;component/Images/About.png",
+                                "CashierOrdersView", null, "Orders Management", false);
+
+                            WorkspaceData availableView = FindAvailableView(workspace);
+                            if (availableView == null)
+                            {
+                                Views.Add(workspace);
+                                SetActiveWorkspace(workspace);
+                            }
+                            else
+                            {
+                                SetActiveWorkspace(availableView);
+                            }
+                        });
+                        miManagement.Children.Add(miCashierOrders);
+                    }
+                    break;
+                case Role.Cashier:
+                    {
+                        CinchMenuItem miCashierOrders = new CinchMenuItem("Cashier Orders");
+                        miCashierOrders.Command = new SimpleCommand<object, object>((x) =>
+                        {
+                            WorkspaceData workspace = new WorkspaceData(@"/CinchV2DemoWPF;component/Images/About.png",
+                                "CashierOrdersView", null, "Orders Management", false);
+
+                            WorkspaceData availableView = FindAvailableView(workspace);
+                            if (availableView == null)
+                            {
+                                Views.Add(workspace);
+                                SetActiveWorkspace(workspace);
+                            }
+                            else
+                            {
+                                SetActiveWorkspace(availableView);
+                            }
+                        });
+                        miManagement.Children.Add(miCashierOrders);
+                    }
+
+                    /*var miKitchen = new CinchMenuItem("Kitchen")
+                    { IconUrl = @"..\Images\Search.png" };
+                    miKitchen.Command = KitchenManagementCommand;
+                    miManagement.Children.Add(miKitchen);
+
+                    var miMaterials = new CinchMenuItem("Materials")
+                    { IconUrl = @"..\Images\Search.png" };
+                    miMaterials.Command = MaterialsManagementCommand;
+                    miManagement.Children.Add(miMaterials);
+
+                    var miUsers = new CinchMenuItem("Users")
+                    { IconUrl = @"..\Images\Search.png" };
+                    miUsers.Command = UsersManagementCommand;
+                    miManagement.Children.Add(miUsers);*/
+                    break;
+            }
 
             /*CinchMenuItem menuImages = new CinchMenuItem("ImageLoaderView");
             menuImages.Command = new SimpleCommand<object, object>((x) =>
@@ -282,19 +310,20 @@ namespace XRMS.Presentation.ViewModels
 
         private void ViewAwareStatusService_ViewLoaded()
         {
-
             if (Designer.IsInDesignMode)
                 return;
 
+            //this.messageBoxService.ShowInformation("ViewAwareStatusService_ViewLoaded123");
+
+            /*_refreshingTimer.Start();
             ReadRestaurantInfo();
-            _refreshingTimer.Start();
 
             WorkspaceData workspace = new WorkspaceData(@"/CinchV2DemoWPF;component/Images/About.png",
                     "CashierOrdersView", null, "Orders Management", false);
             Views.Add(workspace);
             SetActiveWorkspace(workspace);
 
-            /*WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Table.png",
+            WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Table.png",
                     "TablesManagementView", null, "Tables Management", true);
             Views.Add(workspace);
             SetActiveWorkspace(workspace);*/

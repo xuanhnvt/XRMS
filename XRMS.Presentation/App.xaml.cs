@@ -27,16 +27,16 @@ namespace XRMS.Presentation
         /// <summary>
         /// Initiliase Cinch using the CinchBootStrapper. 
         /// </summary>
-        public App()
+        /*public App()
         {
             CinchBootStrapper.Initialise(new List<Assembly> { typeof(App).Assembly });
             ObjectMappingHelper.Setup();
             PropertyInfoFactory.Factory = new PropertyInformationFactory();
             InitializeComponent();
-        }
+        }*/
         #endregion
 
-        /*protected override void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             CinchBootStrapper.Initialise(new List<Assembly> { typeof(App).Assembly });
@@ -80,6 +80,6 @@ namespace XRMS.Presentation
                 // exit
                 Current.Shutdown(-1);
             }
-        }*/
+        }
     }
 }

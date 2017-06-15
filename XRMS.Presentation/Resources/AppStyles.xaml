@@ -2,6 +2,36 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:XRMS.Presentation"
                     xmlns:UserControls="clr-namespace:XRMS.Presentation.UserControls">
+
+    <DrawingBrush x:Key="ChromeBrush" Viewbox="0,0,621.375,420.825" ViewboxUnits="Absolute">
+        <DrawingBrush.Drawing>
+            <ImageDrawing Rect="0,0,621.375,420.825">
+                <ImageDrawing.ImageSource>
+                    <BitmapImage CacheOption="OnLoad" CreateOptions="IgnoreImageCache" UriSource="/Images/Textures/chrome.jpg"/>
+                </ImageDrawing.ImageSource>
+            </ImageDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="WoodBrush" Viewbox="0,0,621.375,420.825" ViewboxUnits="Absolute">
+        <DrawingBrush.Drawing>
+            <ImageDrawing Rect="0,0,621.375,420.825">
+                <ImageDrawing.ImageSource>
+                    <BitmapImage CacheOption="OnLoad" CreateOptions="IgnoreImageCache" UriSource="/Images/Textures/wood.jpg"/>
+                </ImageDrawing.ImageSource>
+            </ImageDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <DrawingBrush x:Key="GlassBrush" Viewbox="0,0,621.375,420.825" ViewboxUnits="Absolute">
+        <DrawingBrush.Drawing>
+            <ImageDrawing Rect="0,0,621.375,420.825">
+                <ImageDrawing.ImageSource>
+                    <BitmapImage CacheOption="OnLoad" CreateOptions="IgnoreImageCache" UriSource="/Images/Textures/woodGold.jpg"/>
+                </ImageDrawing.ImageSource>
+            </ImageDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
     
     <SolidColorBrush x:Key="TabControlNormalBorderBrush" Color="#8C8E94"/>
 
