@@ -185,9 +185,9 @@
     <Style TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewContainer}"/>
     
     <!-- style to create red background for new row which is added into current list -->
-    <Style x:Key="NewItemListViewContainer" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewContainer}">
+    <Style x:Key="RealtimeListViewContainer" TargetType="{x:Type ListViewItem}" BasedOn="{StaticResource ListViewContainer}">
         <Style.Triggers>
-            <DataTrigger Binding="{Binding IsNewItem}" Value="true">
+            <DataTrigger Binding="{Binding IsUpdated}" Value="true">
                 <Setter Property="Background" Value="Red"/>
                 <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
             </DataTrigger>

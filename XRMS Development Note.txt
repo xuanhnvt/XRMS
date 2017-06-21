@@ -24,3 +24,4 @@ the operation
 19. Add logout button, it will come back login screen.
 20. Login screen can not use, exclude it from project, fix later.
 21. xaml designer need connection string of ef
+22. Change view of screen for kitchen.

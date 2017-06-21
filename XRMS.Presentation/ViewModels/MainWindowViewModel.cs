@@ -250,6 +250,25 @@ namespace XRMS.Presentation.ViewModels
                             }
                         });
                         miManagement.Children.Add(miCashierOrders);
+
+                        CinchMenuItem miKitchenOrders = new CinchMenuItem("Kitchen Orders");
+                        miKitchenOrders.Command = new SimpleCommand<object, object>((x) =>
+                        {
+                            WorkspaceData workspace = new WorkspaceData(@"/CinchV2DemoWPF;component/Images/About.png",
+                                "KitchenOrdersView", null, "Kitchen Management", true);
+
+                            WorkspaceData availableView = FindAvailableView(workspace);
+                            if (availableView == null)
+                            {
+                                Views.Add(workspace);
+                                SetActiveWorkspace(workspace);
+                            }
+                            else
+                            {
+                                SetActiveWorkspace(availableView);
+                            }
+                        });
+                        miManagement.Children.Add(miKitchenOrders);
                     }
                     break;
                 case Role.Cashier:
@@ -274,15 +293,7 @@ namespace XRMS.Presentation.ViewModels
                         miManagement.Children.Add(miCashierOrders);
                     }
 
-                    /*var miKitchen = new CinchMenuItem("Kitchen")
-                    { IconUrl = @"..\Images\Search.png" };
-                    miKitchen.Command = KitchenManagementCommand;
-                    miManagement.Children.Add(miKitchen);
-
-                    var miMaterials = new CinchMenuItem("Materials")
-                    { IconUrl = @"..\Images\Search.png" };
-                    miMaterials.Command = MaterialsManagementCommand;
-                    miManagement.Children.Add(miMaterials);
+                    /*
 
                     var miUsers = new CinchMenuItem("Users")
                     { IconUrl = @"..\Images\Search.png" };

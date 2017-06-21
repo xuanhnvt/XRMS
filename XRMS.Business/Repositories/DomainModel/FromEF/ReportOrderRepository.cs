@@ -36,9 +36,9 @@ namespace XRMS.Business.Repositories.DomainModel.FromEF
             //return this.GetBy(x => x.Id == id).FirstOrDefault();
         }
 
-        public ReportOrder GetByOrderId(long id)
+        public ReportOrder GetByOrderCode(string code)
         {
-            ReportOrderEntity entityModel = (this as GenericEntityRepository<ReportOrderEntity>).GetBy(x => x.Id == id).FirstOrDefault();
+            ReportOrderEntity entityModel = (this as GenericEntityRepository<ReportOrderEntity>).GetBy(x => x.Code == code).FirstOrDefault();
             return ToDomainModel(entityModel);
 
             // use this code temporarily

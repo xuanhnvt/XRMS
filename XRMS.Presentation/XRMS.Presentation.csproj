@@ -40,6 +40,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assemblies\Cinch.WPF.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Csla">
       <HintPath>..\Assemblies\Csla.dll</HintPath>
     </Reference>
@@ -67,6 +71,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Assemblies\System.Windows.Interactivity.dll</HintPath>
@@ -106,6 +111,9 @@
     <Compile Include="Popups\OrderPopup.xaml.cs">
       <DependentUpon>OrderPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\PrinterPopup.xaml.cs">
+      <DependentUpon>PrinterPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popups\ProductGroupPopup.xaml.cs">
       <DependentUpon>ProductGroupPopup.xaml</DependentUpon>
     </Compile>
@@ -117,6 +125,13 @@
     </Compile>
     <Compile Include="Popups\UnitPopup.xaml.cs">
       <DependentUpon>UnitPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ReportSrc\ReportDataSet.Designer.cs" />
+    <Compile Include="ReportSrc\ReportReceipt.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportReceipt.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UserControls\FilterTextBox.xaml.cs">
       <DependentUpon>FilterTextBox.xaml</DependentUpon>
@@ -139,6 +154,7 @@
     <Compile Include="ViewModels\MaterialsManagementViewModel.cs" />
     <Compile Include="ViewModels\MaterialViewModel.cs" />
     <Compile Include="ViewModels\OrderViewModel.cs" />
+    <Compile Include="ViewModels\PrinterViewModel.cs" />
     <Compile Include="ViewModels\ProductGroupListViewModel.cs" />
     <Compile Include="ViewModels\ProductGroupViewModel.cs" />
     <Compile Include="ViewModels\ProductViewModel.cs" />
@@ -181,6 +197,10 @@
     <Page Include="Popups\OrderPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Popups\PrinterPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Popups\ProductGroupPopup.xaml">
       <SubType>Designer</SubType>
@@ -299,6 +319,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportSrc\ReportReceipt.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportReceipt.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Images\Banner4.pdn" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -306,6 +330,17 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="ReportSrc\ReportDataSet.xsc">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ReportSrc\ReportDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ReportDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ReportSrc\ReportDataSet.xss">
+      <DependentUpon>ReportDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -374,6 +409,9 @@
     <Resource Include="Images\Textures\Restaurant.jpg" />
     <Resource Include="Images\Textures\wood.jpg" />
     <Resource Include="Images\Textures\woodGold.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -210,6 +210,19 @@ namespace XRMS.Business.Models
         public static readonly PropertyInfo<bool> IsAlwaysReadyProperty = RegisterProperty<bool>(p => p.IsAlwaysReady);
 
         /// <summary>
+        /// Gets or sets the flag IsKitchenProcessCompleted (check if this item is completely processed in kitchen or not)
+        /// </summary>
+        /// <value>
+        /// The flag.
+        /// </value>
+        public bool IsKitchenProcessCompleted
+        {
+            get { return GetProperty(IsKitchenProcessCompletedProperty); }
+            set { SetProperty(IsKitchenProcessCompletedProperty, value); }
+        }
+        public static readonly PropertyInfo<bool> IsKitchenProcessCompletedProperty = RegisterProperty<bool>(p => p.IsKitchenProcessCompleted);
+
+        /// <summary>
         /// Gets or sets the price of item.
         /// </summary>
         /// <value>

@@ -39,6 +39,10 @@ namespace XRMS.Libraries.CslaBase
         // Has object been updated from database?
         private bool _isUpdated = false;
 
+        // Has object acknownledged updated data from database?
+        private bool _isAcknownledged = false;
+        
+
         #endregion // Private Data Members
 
         #region Public Properties
@@ -178,7 +182,14 @@ namespace XRMS.Libraries.CslaBase
         public bool IsUpdated
         {
             get { return _isUpdated; }
-            set { _isUpdated = value; }
+        }
+
+        /// <summary>
+        /// Has object been updated from database?
+        /// </summary>
+        public bool IsAcknownledged
+        {
+            get { return _isAcknownledged; }
         }
         #endregion
 
@@ -303,6 +314,21 @@ namespace XRMS.Libraries.CslaBase
             //_isNew = false;
             //MetaPropertyHasChanged("IsNew");
             base.MarkAsChild();
+        }
+
+        public void MarkUpdated()
+        {
+            _isUpdated = true;
+            _isAcknownledged = false;
+            NotifyPropertyChanged(() => IsUpdated);
+        }
+
+        public virtual void Acknowledge()
+        {
+            _isUpdated = false;
+            _isAcknownledged = true;
+            NotifyPropertyChanged(() => IsUpdated);
+            NotifyPropertyChanged(() => IsAcknownledged);
         }
 
         /// <summary>

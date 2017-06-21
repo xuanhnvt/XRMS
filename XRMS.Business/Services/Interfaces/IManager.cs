@@ -67,7 +67,8 @@ namespace XRMS.Business.Services
 
     public interface IOrderItemManager : IGenericManager<OrderItem>
     {
-
+        void SetOrderItemState(OrderItem item);
+        void SetOutOfKitchenProcess(OrderItem item);
     }
 
     public interface IReportOrderItemEditionManager : IGenericManager<ReportOrderItemEdition>

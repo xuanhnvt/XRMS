@@ -17,42 +17,41 @@ using XRMS.Business.UnitOfWorks;
 
 using MEFedMVVM.ViewModelLocator;
 using Cinch;
+
 namespace XRMS.Business.Services
 {
     /// <summary>
-    /// This class implements the IReportOrderItemEditionManager for WPF purposes.
+    /// This class implements the IOrderItemManager for WPF purposes.
     /// </summary>
     [PartCreationPolicy(CreationPolicy.Shared)]
-    [ExportService(ServiceType.Runtime, typeof(IReportOrderItemEditionManager))]
-    public class ReportOrderItemEditionManager : GenericManager<ReportOrderItemEdition>, IReportOrderItemEditionManager
+    [ExportService(ServiceType.Runtime, typeof(IOrderItemManager))]
+    public class OrderItemManager : GenericManager<OrderItem>, IOrderItemManager
     {
         private UnitOfWork _uow;
         //private IRepositoryProvider _provider = new RepositoryProvider(RepositoryFactories.Instance());
 
-        public ReportOrderItemEditionManager()
+        public OrderItemManager()
         {
             //_uow = new UnitOfWork(new RepositoryProvider(RepositoryFactories.Instance()));
         }
 
-        public override ReportOrderItemEdition GetByKey(ReportOrderItemEdition itemWithKeys)
+        public override OrderItem GetByKey(OrderItem itemWithKeys)
         {
-            ReportOrderItemEdition item = null;
+            OrderItem item = null;
             try
             {
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    item = _uow.ReportOrderItemEditionRepository
-                        .GetBy(o => o.ReportCounter == itemWithKeys.ReportCounter
-                                    && o.EditionCounter == itemWithKeys.EditionCounter
+                    item = _uow.OrderItemRepository
+                        .GetBy(o => o.OrderId == itemWithKeys.OrderId
                                     && o.Sequence == itemWithKeys.Sequence)
                         .FirstOrDefault();
                     if (item != null)
                     {
                         // get data of inside class
-                        item.OrderEdition = _uow.ReportOrderEditionRepository
-                            .GetBy(o => o.ReportCounter == item.ReportCounter && o.EditionCounter == item.EditionCounter)
-                            .FirstOrDefault(); ;
+                        item.ProductInfo = _uow.ProductRepository.GetById(item.ProductId);
+                        //item.Location.MarkOld();
                         item.MarkOld();
                     }
                 }
@@ -64,62 +63,22 @@ namespace XRMS.Business.Services
             return item;
         }
 
-        public override List<ReportOrderItemEdition> GetList()
+        public override List<OrderItem> GetList()
         {
-            List<ReportOrderItemEdition> list = null;
+            List<OrderItem> list = null;
 
             try
             {
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    list = _uow.ReportOrderItemEditionRepository.GetAll().ToList();
+                    list = _uow.OrderItemRepository.GetBy(o => o.IsAlwaysReady == false).ToList();
                     if (list != null)
                     {
-                        foreach (ReportOrderItemEdition item in list)
+                        foreach (OrderItem item in list)
                         {
-                            item.OrderEdition = _uow.ReportOrderEditionRepository
-                            .GetBy(o => o.ReportCounter == item.ReportCounter && o.EditionCounter == item.EditionCounter)
-                            .FirstOrDefault(); ;
-                            item.MarkOld();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
-            }
-            return list;
-        }
-
-
-        public List<ReportOrderItemEdition> GetEdititonReportOfOrder(Order order)
-        {
-            List<ReportOrderItemEdition> list = null;
-
-            try
-            {
-                if (order == null)
-                {
-                    throw new ArgumentNullException("order");
-                }
-
-                using (XRMSEntities context = new XRMSEntities())
-                {
-                    _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    // get report of order
-                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderCode(order.Code);
-
-                    // get edition report of order base on report counter
-                    list = _uow.ReportOrderItemEditionRepository.GetBy(o => o.ReportCounter == report.ReportCounter).ToList();
-                    if (list != null)
-                    {
-                        foreach (ReportOrderItemEdition item in list)
-                        {
-                            item.OrderEdition = _uow.ReportOrderEditionRepository
-                            .GetBy(o => o.ReportCounter == item.ReportCounter && o.EditionCounter == item.EditionCounter)
-                            .FirstOrDefault(); ;
+                            item.ProductInfo = _uow.ProductRepository.GetById(item.ProductId);
+                            //item.Location.MarkOld();
                             item.MarkOld();
                         }
                     }
@@ -135,9 +94,9 @@ namespace XRMS.Business.Services
         /// <summary>
         /// Find item from list
         /// </summary>
-        public override ReportOrderItemEdition FindItem(ReportOrderItemEdition item, List<ReportOrderItemEdition> list)
+        public override OrderItem FindItem(OrderItem item, List<OrderItem> list)
         {
-            ReportOrderItemEdition resultItem = null;
+            OrderItem resultItem = null;
             try
             {
                 if (item == null)
@@ -146,7 +105,7 @@ namespace XRMS.Business.Services
                 if (list == null)
                     throw new ArgumentNullException("list");
 
-                resultItem = list.SingleOrDefault<ReportOrderItemEdition>(o => o.ReportCounter == item.ReportCounter && o.EditionCounter == item.EditionCounter);
+                resultItem = list.SingleOrDefault<OrderItem>(x => x.OrderId == item.OrderId && x.Sequence == item.Sequence);
             }
             catch (Exception ex)
             {
@@ -155,7 +114,7 @@ namespace XRMS.Business.Services
             return resultItem;
         }
 
-        public override bool Create(ReportOrderItemEdition item)
+        public override bool Create(OrderItem item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -166,7 +125,7 @@ namespace XRMS.Business.Services
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    _uow.ReportOrderItemEditionRepository.Add(item);
+                    _uow.OrderItemRepository.Add(item);
                     _uow.SaveChanges();
                     result = true;
                 }
@@ -178,7 +137,7 @@ namespace XRMS.Business.Services
             return result;
         }
 
-        public override bool Update(ReportOrderItemEdition item)
+        public override bool Update(OrderItem item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -189,7 +148,7 @@ namespace XRMS.Business.Services
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    _uow.ReportOrderItemEditionRepository.Update(item);
+                    _uow.OrderItemRepository.Update(item);
                     _uow.SaveChanges();
                     result = true;
                 }
@@ -201,7 +160,7 @@ namespace XRMS.Business.Services
             return result;
         }
 
-        public override bool Delete(ReportOrderItemEdition item)
+        public override bool Delete(OrderItem item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -212,7 +171,7 @@ namespace XRMS.Business.Services
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    _uow.ReportOrderItemEditionRepository.Remove(item);
+                    _uow.OrderItemRepository.Remove(item);
                     _uow.SaveChanges();
                     result = true;
                 }
@@ -222,6 +181,54 @@ namespace XRMS.Business.Services
                 throw new Exception(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
             }
             return result;
+        }
+
+        public void SetOrderItemState(OrderItem item)
+        {
+            if (item == null)
+                throw new ArgumentNullException("item");
+            try
+            {
+                using (XRMSEntities context = new XRMSEntities())
+                {
+                    _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
+                    // get order item
+                    OrderItem orderItem = _uow.OrderItemRepository.GetBy(o => o.OrderId == item.OrderId && o.Sequence == item.Sequence).FirstOrDefault();
+                    orderItem.State = item.State;
+                    _uow.OrderItemRepository.Update(orderItem);
+
+                    // commit
+                    _uow.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
+            }
+        }
+
+        public void SetOutOfKitchenProcess(OrderItem item)
+        {
+            if (item == null)
+                throw new ArgumentNullException("item");
+            try
+            {
+                using (XRMSEntities context = new XRMSEntities())
+                {
+                    _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
+                    // get order item
+                    OrderItem orderItem = _uow.OrderItemRepository.GetBy(o => o.OrderId == item.OrderId && o.Sequence == item.Sequence).FirstOrDefault();
+                    orderItem.IsKitchenProcessCompleted = true;
+                    _uow.OrderItemRepository.Update(orderItem);
+
+                    // commit
+                    _uow.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
+            }
         }
     }
 }

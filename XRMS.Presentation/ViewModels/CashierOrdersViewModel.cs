@@ -5,6 +5,9 @@ using System.Text;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Data;
+//using Microsoft.Reporting.WinForms;
 
 using System.ComponentModel.Composition;
 using MEFedMVVM.ViewModelLocator;
@@ -96,19 +99,6 @@ namespace XRMS.Presentation.ViewModels
                 }
                 _reportOrderEdition = reportOrderEdition;
 
-                if (SelectedItem != null)
-                {
-                    (ModelManager as IOrderManager).FetchOrderItems(SelectedItem);
-                    CollectionViewSource.GetDefaultView(SelectedItem.OrderItems).Filter = o => IsShowCancelledProduct
-                                                 || ((OrderItem)o).IsCancelled == false;
-
-                    /*ReportEditionOrderItemList = _reportOrderEdition.GetEdititonReportOfOrder(SelectedItem);
-                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ReportEditionOrderItemList);
-                    PropertyGroupDescription groupDescription = new PropertyGroupDescription(SelectedGroupBy.PropertyName);
-                    view.GroupDescriptions.Clear();
-                    view.GroupDescriptions.Add(groupDescription);*/
-                }
-
                 // initialize command
                 this.RefreshTablesCommand = new CommandBase<Table>(o => this.ExecuteRefreshTablesCommand(o));
                 this.ShowCancelledProductCommand = new CommandBase<object>(o => this.ExecuteShowCancelledProductCommand());
@@ -137,16 +127,25 @@ namespace XRMS.Presentation.ViewModels
                 GroupByList.Add(new ReportGroupBy("Mon an", "ProductName"));
                 SelectedGroupBy = GroupByList[0];
 
-                ReportEditionOrderItemList = _reportOrderEdition.GetEdititonReportOfOrder(SelectedItem);
-                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ReportEditionOrderItemList);
-                    PropertyGroupDescription groupDescription = new PropertyGroupDescription(SelectedGroupBy.PropertyName);
-                    view.GroupDescriptions.Clear();
-                    view.GroupDescriptions.Add(groupDescription);
-
                 //Mediator.Instance.RegisterHandler<T>("Updated" + typeof(T).Name + "Successfully", HandleReceivedMessage);
                 //Mediator.Instance.RegisterHandler<T>("Created" + typeof(T).Name + "Successfully", HandleReceivedMessage);
 
                 Mediator.Instance.Register(this);
+
+
+
+                if (SelectedItem != null)
+                {
+                    (ModelManager as IOrderManager).FetchOrderItems(SelectedItem);
+                    CollectionViewSource.GetDefaultView(SelectedItem.OrderItems).Filter = o => IsShowCancelledProduct
+                                                 || ((OrderItem)o).IsCancelled == false;
+
+                    ReportEditionOrderItemList = _reportOrderEdition.GetEdititonReportOfOrder(SelectedItem);
+                    CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(ReportEditionOrderItemList);
+                    PropertyGroupDescription groupDescription = new PropertyGroupDescription(SelectedGroupBy.PropertyName);
+                    view.GroupDescriptions.Clear();
+                    view.GroupDescriptions.Add(groupDescription);
+                }
             }
             catch (Exception ex)
             {
@@ -569,13 +568,76 @@ namespace XRMS.Presentation.ViewModels
         {
             try
             {
-                (ModelManager as IOrderManager).UpdatePrintCount(GlobalObjects.SystemUser, item);
-                //SelectedItem = this.Items[0];
+                DataTable _orderItemDataTable = new DataTable();
+                //Make OrderItem DataTable
+                _orderItemDataTable.Columns.Add("Sequence", typeof(byte));
+                _orderItemDataTable.Columns.Add("Item", typeof(string));
+                _orderItemDataTable.Columns.Add("Unit", typeof(string));
+                _orderItemDataTable.Columns.Add("UnitPrice", typeof(decimal));
+                _orderItemDataTable.Columns.Add("Quantity", typeof(Int32));
+                _orderItemDataTable.Columns.Add("ItemPrice", typeof(decimal));
 
-                // refresh item list
-                this.ExecuteRefreshCommand();
-                // refresh table list
-                RefreshTablesCommand.Execute(null);
+                byte sequence = 1;
+                List<OrderItem> list = item.OrderItems.Where(o => o.IsCancelled == false).ToList();
+
+                foreach (OrderItem orderItem in list)
+                {
+                    DataRow dr = _orderItemDataTable.NewRow();
+                    dr["Item"] = orderItem.ProductInfo.Name;
+                    dr["Unit"] = orderItem.ProductInfo.Unit.Name;
+                    dr["UnitPrice"] = orderItem.ProductInfo.Price;
+                    dr["Quantity"] = orderItem.Quantity;
+                    dr["ItemPrice"] = orderItem.ItemPrice;
+                    dr["Sequence"] = sequence++;
+
+                    _orderItemDataTable.Rows.Add(dr);
+                }
+
+                Restaurant CurrentRestaurant = GlobalObjects.RestaurantInfo;
+
+                string name = "";
+                string address = "";
+                string phoneNumber = "";
+                if (CurrentRestaurant != null)
+                {
+                    name = CurrentRestaurant.Name;
+                    address = CurrentRestaurant.Address;
+                    phoneNumber = CurrentRestaurant.PhoneNumber1 + " - " + CurrentRestaurant.PhoneNumber2;
+                }
+
+                List<CrystalReportParameter> arrParams = new List<CrystalReportParameter>();
+                arrParams.Add(new CrystalReportParameter("rpm_Date", GlobalObjects.CurrentDateTime.ToString("MM/dd/yyyy HH:mm")));
+                arrParams.Add(new CrystalReportParameter("rpm_CashierName", GlobalObjects.SystemUser.Fullname));
+                arrParams.Add(new CrystalReportParameter("rpm_OrderNo", item.Code));
+                arrParams.Add(new CrystalReportParameter("rpm_TableNo", item.Table.Name));
+                arrParams.Add(new CrystalReportParameter("rpm_VAT", item.VatPrice));
+                arrParams.Add(new CrystalReportParameter("rpm_ServiceCharge", item.ServiceCharge));
+                arrParams.Add(new CrystalReportParameter("rpm_Discount", item.DiscountPrice));
+                arrParams.Add(new CrystalReportParameter("rpm_TotalPrice", item.TotalPrice));
+                arrParams.Add(new CrystalReportParameter("rpm_SubTotalPrice", item.SubTotalPrice));
+                arrParams.Add(new CrystalReportParameter("rpm_RestaurantName", name));
+                arrParams.Add(new CrystalReportParameter("rpm_Address", address));
+                arrParams.Add(new CrystalReportParameter("rpm_PhoneNumber", phoneNumber));
+                arrParams.Add(new CrystalReportParameter("rpm_PrintCount", item.PrintCount + 1));
+
+                string reportPath = Environment.CurrentDirectory + "\\ReportSrc";
+                //ReportPrintClass objReportPrintClass = new ReportPrintClass("PublicDataSet_OrderItems", _orderItemDataTable, reportPath + "\\Report_Receipt.rdlc", arrParams, 8.27, 11.69, 0.5, 0.5, 0.2, 0.2);
+                CrystalReportPrintClass objReportPrintClass = new CrystalReportPrintClass("ReportDataSet_OrderItems", _orderItemDataTable, reportPath + "\\ReportReceipt.rpt", arrParams, 8.27, 11.69, 0, 0, 0, 0);
+
+                PrinterViewModel viewModel = new PrinterViewModel(this.MessageBoxService);
+                bool? result = this.UIVisualizerService.ShowDialog("PrinterPopup", viewModel);
+
+                if (result.HasValue && result.Value)
+                {
+                    objReportPrintClass.Print(viewModel.SelectedPrinter, 1);
+                    (ModelManager as IOrderManager).UpdatePrintCount(GlobalObjects.SystemUser, item);
+                    //SelectedItem = this.Items[0];
+
+                    // refresh item list
+                    this.ExecuteRefreshCommand();
+                    // refresh table list
+                    RefreshTablesCommand.Execute(null);
+                }
             }
             catch (Exception ex)
             {

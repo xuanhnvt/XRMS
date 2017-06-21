@@ -107,7 +107,6 @@ namespace XRMS.Business.Services
 
                     // add order report
                     ReportOrder report = new ReportOrder();
-                    report.Id = resultItem.Id;
                     report.Code = resultItem.Code;
                     report.CreatorName = resultItem.CreatorUser.Fullname;
                     report = _uow.ReportOrderRepository.Add(report);
@@ -186,7 +185,7 @@ namespace XRMS.Business.Services
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
                     // get order report, useful for writing report
-                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderId(item.Id);
+                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderCode(item.Code);
                     item.Table = _uow.TableRepository.GetById(item.TableId);
 
                     Order order = _uow.OrderRepository.GetById(item.Id);
@@ -584,7 +583,7 @@ namespace XRMS.Business.Services
                     _uow.TableRepository.Update(table);
 
                     // get order report, useful for writing report
-                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderId(item.Id);
+                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderCode(item.Code);
                     report.TableCode = item.Table.Code;
                     report.TableName = item.Table.Name;
                     report.State = order.State;
@@ -625,7 +624,7 @@ namespace XRMS.Business.Services
                         reportOrderItem.StopDatetime = orderItem.StopDatetime;
                         reportOrderItem.ServeDatetime = orderItem.ServeDatetime;
                         reportOrderItem.IsCancelled = orderItem.IsCancelled;
-                        reportOrderItem.IsAlwaysReady = orderItem.IsAlwaysReady;
+                        reportOrderItem.IsKitchenProcessCompleted = orderItem.IsKitchenProcessCompleted;
 
                         _uow.ReportOrderItemRepository.Add(reportOrderItem);
                     }
@@ -675,6 +674,9 @@ namespace XRMS.Business.Services
 
                     reportEvent1 = _uow.ReportEventRepository.Add(reportEvent1);
 
+                    // delete real time order
+                    _uow.OrderRepository.Remove(order);
+
                     // commit
                     _uow.SaveChanges();
                 }
@@ -715,7 +717,7 @@ namespace XRMS.Business.Services
                     _uow.TableRepository.Update(table);
 
                     // get order report, useful for writing report
-                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderId(item.Id);
+                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderCode(item.Code);
                     report.TableCode = item.Table.Code;
                     report.TableName = item.Table.Name;
                     report.State = order.State;
@@ -756,7 +758,7 @@ namespace XRMS.Business.Services
                         reportOrderItem.StopDatetime = orderItem.StopDatetime;
                         reportOrderItem.ServeDatetime = orderItem.ServeDatetime;
                         reportOrderItem.IsCancelled = orderItem.IsCancelled;
-                        reportOrderItem.IsAlwaysReady = orderItem.IsAlwaysReady;
+                        reportOrderItem.IsKitchenProcessCompleted = orderItem.IsKitchenProcessCompleted;
 
                         _uow.ReportOrderItemRepository.Add(reportOrderItem);
                     }
@@ -770,6 +772,9 @@ namespace XRMS.Business.Services
                     reportEvent1.Text = actor.Fullname + " cancelled order " + item.Code + " for table \"" + item.Table.Name + "\"";
 
                     reportEvent1 = _uow.ReportEventRepository.Add(reportEvent1);
+
+                    // delete real time order
+                    _uow.OrderRepository.Remove(order);
 
                     // commit
                     _uow.SaveChanges();
@@ -811,7 +816,7 @@ namespace XRMS.Business.Services
                     _uow.TableRepository.Update(table);
 
                     // get order report, useful for writing report
-                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderId(item.Id);
+                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderCode(item.Code);
 
                     // add event report
                     ReportEvent reportEvent1 = new ReportEvent();
@@ -862,7 +867,7 @@ namespace XRMS.Business.Services
                     _uow.OrderRepository.Update(order);
 
                     // get order report, useful for writing report
-                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderId(item.Id);
+                    ReportOrder report = _uow.ReportOrderRepository.GetByOrderCode(item.Code);
 
                     // add event report
                     ReportEvent reportEvent1 = new ReportEvent();

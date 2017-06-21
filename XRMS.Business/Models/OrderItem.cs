@@ -14,7 +14,7 @@ using XRMS.Libraries.CslaBase;
 
 namespace XRMS.Business.Models
 {
-    public enum OrderItemState { Ordered, Processing, Ready, Served };
+    public enum OrderItemState { Ordered, Processing, Ready, Served, OutOfKitchen };
 
     [Serializable]
     public class OrderItem : CslaBusinessBase<OrderItem>
@@ -23,6 +23,7 @@ namespace XRMS.Business.Models
 
         int _edittedQuantity;
         int _oldQuantity;
+        string _changeLog = string.Empty;
 
         #endregion // Private Data Members
 
@@ -155,7 +156,7 @@ namespace XRMS.Business.Models
         public bool IsCancelled
         {
             get { return GetProperty(IsCancelledProperty); }
-            private set { SetProperty(IsCancelledProperty, value); }
+            set { SetProperty(IsCancelledProperty, value); }
         }
         public static readonly PropertyInfo<bool> IsCancelledProperty = RegisterProperty<bool>(p => p.IsCancelled);
 
@@ -171,6 +172,19 @@ namespace XRMS.Business.Models
             set { SetProperty(IsAlwaysReadyProperty, value); }
         }
         public static readonly PropertyInfo<bool> IsAlwaysReadyProperty = RegisterProperty<bool>(p => p.IsAlwaysReady);
+
+        /// <summary>
+        /// Gets or sets the flag IsKitchenProcessCompleted (check if this item is completely processed in kitchen or not)
+        /// </summary>
+        /// <value>
+        /// The flag.
+        /// </value>
+        public bool IsKitchenProcessCompleted
+        {
+            get { return GetProperty(IsKitchenProcessCompletedProperty); }
+            set { SetProperty(IsKitchenProcessCompletedProperty, value); }
+        }
+        public static readonly PropertyInfo<bool> IsKitchenProcessCompletedProperty = RegisterProperty<bool>(p => p.IsKitchenProcessCompleted);
 
         /// <summary>
         /// Gets or sets the price of item.
@@ -214,7 +228,7 @@ namespace XRMS.Business.Models
         }
 
         /// <summary>
-        /// Gets or sets the old quantity of item.
+        /// Gets the old quantity of item.
         /// </summary>
         /// <value>
         /// The updated quantity.
@@ -222,6 +236,17 @@ namespace XRMS.Business.Models
         public int OldQuantity
         {
             get { return _oldQuantity; }
+        }
+
+        /// <summary>
+        /// Gets log that change item state.
+        /// </summary>
+        /// <value>
+        /// The updated quantity.
+        /// </value>
+        public string ChangeLog
+        {
+            get { return _changeLog; }
         }
         #endregion
 
@@ -244,6 +269,17 @@ namespace XRMS.Business.Models
             IsCancelled = false;
         }
 
+        public void AddChangeLog(string log)
+        {
+            _changeLog += log;
+            NotifyPropertyChanged(() => ChangeLog);
+        }
+
+        public override void Acknowledge()
+        {
+            _changeLog = string.Empty;
+            base.Acknowledge();
+        }
         #endregion
     }
 

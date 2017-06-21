@@ -13,6 +13,7 @@
     <ValueConverters:OrderItemStateConverter x:Key="OrderItemStateConverter"/>
     <ValueConverters:TableStateConverter x:Key="TableStateConverter"/>
     <ValueConverters:ProductEditionTypeConverter x:Key="ProductEditionTypeConverter"/>
+    <ValueConverters:OrderItemStateToStringConverter x:Key="OrderItemStateToStringConverter"/>
     <!--ValueConverters:MenuIconConverter x:Key="MenuIconConv" /-->
     <!--ValueConverters:BoolToYesNoAnswerConverter x:Key="BoolToYesNoAnswerConverter" /-->
 

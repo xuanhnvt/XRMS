@@ -76,6 +76,7 @@
           <Property Name="SERVE_DATETIME" Type="datetime" Nullable="false" />
           <Property Name="IS_CANCELLED" Type="bit" Nullable="false" />
           <Property Name="OUT_KITCHEN_PROCESS" Type="bit" Nullable="false" />
+          <Property Name="ALWAYS_READY" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ORDERS">
           <Key>
@@ -223,7 +224,6 @@
             <PropertyRef Name="REPORT_COUNTER" />
           </Key>
           <Property Name="REPORT_COUNTER" Type="bigint" Nullable="false" />
-          <Property Name="ORDER_ID" Type="bigint" Nullable="false" />
           <Property Name="ORDER_CODE" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="TABLE_CODE" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="TABLE_NAME" Type="nvarchar" MaxLength="100" Nullable="false" />
@@ -852,10 +852,11 @@
           <Property Name="CreateDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="State" Type="Byte" Nullable="false" />
           <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
-          <Property Name="IsAlwaysReady" Type="Boolean" Nullable="false" />
+          <Property Name="IsKitchenProcessCompleted" Type="Boolean" Nullable="false" />
           <Property Name="StartDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="StopDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ServeDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsAlwaysReady" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="OrderEntity">
           <Key>
@@ -958,7 +959,6 @@
           <Property Name="Action" Type="Byte" Nullable="false" />
           <Property Name="CurrentAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="NewAmount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <NavigationProperty Name="MATERIAL" Relationship="XRMSModel.FK_MATERIAL_LOGS_MATERIALS" FromRole="MATERIAL_LOGS" ToRole="MaterialEntity" />
         </EntityType>
         <EntityType Name="ReportEventEntity">
           <Key>
@@ -1014,14 +1014,13 @@
           <Property Name="StopDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ServeDatetime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsCancelled" Type="Boolean" Nullable="false" />
-          <Property Name="IsAlwaysReady" Type="Boolean" Nullable="false" />
+          <Property Name="IsKitchenProcessCompleted" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="ReportOrderEntity">
           <Key>
             <PropertyRef Name="ReportCounter" />
           </Key>
           <Property Name="ReportCounter" Type="Int64" Nullable="false" />
-          <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="Code" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="TableCode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="TableName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -1283,10 +1282,11 @@
           <EntitySetMapping Name="OrderItemEntities">
             <EntityTypeMapping TypeName="XRMSModel.OrderItemEntity">
               <MappingFragment StoreEntitySet="ORDER_ITEMS">
+                <ScalarProperty Name="IsAlwaysReady" ColumnName="ALWAYS_READY" />
                 <ScalarProperty Name="ServeDatetime" ColumnName="SERVE_DATETIME" />
                 <ScalarProperty Name="StopDatetime" ColumnName="STOP_PROCESS_DATETIME" />
                 <ScalarProperty Name="StartDatetime" ColumnName="START_PROCESS_DATETIME" />
-                <ScalarProperty Name="IsAlwaysReady" ColumnName="OUT_KITCHEN_PROCESS" />
+                <ScalarProperty Name="IsKitchenProcessCompleted" ColumnName="OUT_KITCHEN_PROCESS" />
                 <ScalarProperty Name="IsCancelled" ColumnName="IS_CANCELLED" />
                 <ScalarProperty Name="State" ColumnName="STATE" />
                 <ScalarProperty Name="CreateDatetime" ColumnName="CREATE_DATETIME" />
@@ -1388,7 +1388,7 @@
           <EntitySetMapping Name="ReportOrderItemEntities">
             <EntityTypeMapping TypeName="XRMSModel.ReportOrderItemEntity">
               <MappingFragment StoreEntitySet="REP_ORDER_ITEMS">
-                <ScalarProperty Name="IsAlwaysReady" ColumnName="OUT_KITCHEN_PROCESS" />
+                <ScalarProperty Name="IsKitchenProcessCompleted" ColumnName="OUT_KITCHEN_PROCESS" />
                 <ScalarProperty Name="IsCancelled" ColumnName="IS_CANCELLED" />
                 <ScalarProperty Name="ServeDatetime" ColumnName="SERVE_DATETIME" />
                 <ScalarProperty Name="StopDatetime" ColumnName="STOP_PROCESS_DATETIME" />
@@ -1431,7 +1431,6 @@
                 <ScalarProperty Name="TableName" ColumnName="TABLE_NAME" />
                 <ScalarProperty Name="TableCode" ColumnName="TABLE_CODE" />
                 <ScalarProperty Name="Code" ColumnName="ORDER_CODE" />
-                <ScalarProperty Name="Id" ColumnName="ORDER_ID" />
                 <ScalarProperty Name="ReportCounter" ColumnName="REPORT_COUNTER" />
               </MappingFragment>
             </EntityTypeMapping>

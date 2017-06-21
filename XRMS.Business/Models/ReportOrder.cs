@@ -51,19 +51,6 @@ namespace XRMS.Business.Models
         public static readonly PropertyInfo<long> ReportCounterProperty = RegisterProperty<long>(p => p.ReportCounter);
 
         /// <summary>
-        /// Gets or sets the order id.
-        /// </summary>
-        /// <value>
-        /// The order id.
-        /// </value>
-        public long Id
-        {
-            get { return GetProperty(IdProperty); }
-            set { SetProperty(IdProperty, value); }
-        }
-        public static readonly PropertyInfo<long> IdProperty = RegisterProperty<long>(p => p.Id);
-
-        /// <summary>
         /// Gets or sets the table code that matches with this order.
         /// </summary>
         /// <value>

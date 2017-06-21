@@ -81,7 +81,7 @@ namespace XRMS.Business.Repositories.DomainModel
     public interface IReportOrderRepository : IGenericRepository<ReportOrder>
     {
         ReportOrder GetByReportCounter(long counter);
-        ReportOrder GetByOrderId(long counter);
+        ReportOrder GetByOrderCode(string code);
     }
     public interface IReportOrderItemRepository : IGenericRepository<ReportOrderItem>
     {
