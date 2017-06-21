@@ -147,6 +147,7 @@
     <Compile Include="ValueConverters\TableStateConverter.cs" />
     <Compile Include="ViewModels\CashierOrdersViewModel.cs" />
     <Compile Include="ViewModels\KeyPadViewModel.cs" />
+    <Compile Include="ViewModels\KitchenOrdersViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MaterialGroupListViewModel.cs" />
     <Compile Include="ViewModels\MaterialGroupViewModel.cs" />
@@ -165,6 +166,9 @@
     <Compile Include="ViewModels\UnitViewModel.cs" />
     <Compile Include="Views\CashierOrdersView.xaml.cs">
       <DependentUpon>CashierOrdersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\KitchenOrdersView.xaml.cs">
+      <DependentUpon>KitchenOrdersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
@@ -265,6 +269,10 @@
     <Page Include="Views\CashierOrdersView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\KitchenOrdersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\LoginView.xaml">
       <Generator>MSBuild:Compile</Generator>

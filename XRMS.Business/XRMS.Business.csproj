@@ -119,6 +119,7 @@
     <Compile Include="Services\Implementations\GlobalDataManager.cs" />
     <Compile Include="Services\Implementations\MaterialGroupManager.cs" />
     <Compile Include="Services\Implementations\MaterialManager.cs" />
+    <Compile Include="Services\Implementations\OrderItemManger.cs" />
     <Compile Include="Services\Implementations\OrderManager.cs" />
     <Compile Include="Services\Implementations\ProductGroupManager.cs" />
     <Compile Include="Services\Implementations\ProductManager.cs" />
