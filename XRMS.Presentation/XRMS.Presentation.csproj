@@ -410,7 +410,9 @@
   <ItemGroup>
     <Resource Include="Images\Profile.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\Printer.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Textures\chrome.jpg" />
     <Resource Include="Images\Textures\Refresh.ico" />

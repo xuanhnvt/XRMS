@@ -20,9 +20,6 @@ namespace XRMS.Presentation.ViewModels
         private ObservableCollection<string> _printerList = new ObservableCollection<string>();
         private string _selectedPrinter;
 
-        CommandBase<object> _okCommand;
-        CommandBase<object> _cancelCommand;
-
         IMessageBoxService messageBoxService = null;
         #endregion // Private Data Members
 

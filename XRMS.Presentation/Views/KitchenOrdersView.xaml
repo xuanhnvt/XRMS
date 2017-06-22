@@ -149,7 +149,7 @@
                         <Grid Grid.Row="0" HorizontalAlignment="Stretch" Background="{DynamicResource SectionHeaderPanelBackgroundBrush}">
                             <Label Content="Completed Order Items"
                                    Style="{DynamicResource LabelSectionHeaderStyle}"
-                                   Margin="5" Width="150"/>
+                                   Margin="5" Width="200"/>
                             <!--Button Style="{DynamicResource RefreshButtonStyle}"
                                     Width="24" Height="24"
                                     HorizontalAlignment="Right" VerticalAlignment="Center"
