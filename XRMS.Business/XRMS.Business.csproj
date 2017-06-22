@@ -128,6 +128,7 @@
     <Compile Include="Services\Implementations\UnitManager.cs" />
     <Compile Include="Services\Implementations\GenericManager.cs" />
     <Compile Include="Services\Implementations\UserManager.cs" />
+    <Compile Include="Services\Implementations\UserRoleManager.cs" />
     <Compile Include="UnitOfWorks\IUnitOfWork.cs" />
     <Compile Include="Repositories\RepositoryFactories.cs" />
     <Compile Include="Repositories\EntityModel\FromEF\IRepository.cs" />

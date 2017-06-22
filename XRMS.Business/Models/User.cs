@@ -86,8 +86,6 @@ namespace XRMS.Business.Models
 
         #endregion
 
-
-
         #region Public Methods
 
         /// <summary>

@@ -18,23 +18,24 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="2"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"
+                        Background="{DynamicResource PageHeaderPanelBackgroundBrush}">
                 <Image Source="../Images/Keypad.ico" 
                        Width="36" Height="36"
+                       Margin="10,0,0,0"
                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{Binding InputName}"
                        Margin="10,0,0,0"
-                       HorizontalAlignment="Left" VerticalAlignment="Center"
-                       FontWeight="Bold" Foreground="Orange" FontSize="18"/>
+                       Style="{DynamicResource LabelPageHeaderStyle}"/>
             </StackPanel>
 
-            <Rectangle Grid.Row="1"
+            <!--Rectangle Grid.Row="1"
                        Height="2"
                        HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                       Fill="Black"/>
+                       Fill="Black"/-->
         </Grid>
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>

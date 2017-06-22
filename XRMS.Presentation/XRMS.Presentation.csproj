@@ -126,6 +126,9 @@
     <Compile Include="Popups\UnitPopup.xaml.cs">
       <DependentUpon>UnitPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\UserPopup.xaml.cs">
+      <DependentUpon>UserPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ReportSrc\ReportDataSet.Designer.cs" />
     <Compile Include="ReportSrc\ReportReceipt.cs">
       <AutoGen>True</AutoGen>
@@ -164,6 +167,8 @@
     <Compile Include="ViewModels\TableListViewModel.cs" />
     <Compile Include="ViewModels\UnitListViewModel.cs" />
     <Compile Include="ViewModels\UnitViewModel.cs" />
+    <Compile Include="ViewModels\UsersManagementViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="Views\CashierOrdersView.xaml.cs">
       <DependentUpon>CashierOrdersView.xaml</DependentUpon>
     </Compile>
@@ -181,6 +186,9 @@
     </Compile>
     <Compile Include="Views\TablesManagementView.xaml.cs">
       <DependentUpon>TablesManagementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UsersManagementView.xaml.cs">
+      <DependentUpon>UsersManagementView.xaml</DependentUpon>
     </Compile>
     <Page Include="Popups\AreaPopup.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -219,6 +227,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Popups\UnitPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Popups\UserPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -306,6 +318,10 @@
     <Page Include="Views\TablesManagementView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UsersManagementView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -422,6 +438,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Customers.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -64,7 +64,7 @@ namespace XRMS.Presentation.ViewModels
             this.StopProcessCommand = new CommandBase<OrderItem>(o => this.ExecuteStopProcessCommand(o), o => this.CanExecuteStopProcessCommand(o));
             this.SelectOrderItemCommand = new CommandBase<OrderItem>(o => this.ExecuteSelectOrderItemCommand(o), o => this.CanExecuteSelectOrderItemCommand(o));
 
-            this.DisplayName = "Kitchen OrderItems Management";
+            this.DisplayName = "Kitchen Management";
             this.InitializeKitchenOrderItemList();
 
             Mediator.Instance.Register(this);

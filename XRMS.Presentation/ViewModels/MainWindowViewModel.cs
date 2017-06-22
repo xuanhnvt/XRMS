@@ -177,6 +177,25 @@ namespace XRMS.Presentation.ViewModels
             {
                 case Role.Manager:
                     {
+                        CinchMenuItem miUsers = new CinchMenuItem("Users");
+                        miUsers.Command = new SimpleCommand<object, object>((x) =>
+                        {
+                            WorkspaceData workspace = new WorkspaceData(@"/XRMS.Presentation;component/Images/Customers.png",
+                                "UsersManagementView", null, "Users Management", true);
+
+                            WorkspaceData availableView = FindAvailableView(workspace);
+                            if (availableView == null)
+                            {
+                                Views.Add(workspace);
+                                SetActiveWorkspace(workspace);
+                            }
+                            else
+                            {
+                                SetActiveWorkspace(availableView);
+                            }
+                        });
+                        miManagement.Children.Add(miUsers);
+
                         CinchMenuItem miTables = new CinchMenuItem("Tables");
                         miTables.Command = new SimpleCommand<object, object>((x) =>
                         {

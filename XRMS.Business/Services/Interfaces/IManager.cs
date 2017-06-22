@@ -80,6 +80,11 @@ namespace XRMS.Business.Services
     {
 
     }
+    
+    public interface IUserRoleManager : IGenericManager<UserRole>
+    {
+
+    }
 
     public interface IGlobalDataManager
     {
