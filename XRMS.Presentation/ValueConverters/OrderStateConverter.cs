@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Globalization;
 using System.Windows.Data;
 
@@ -11,7 +8,6 @@ namespace XRMS.Presentation.ValueConverters
 {
     class OrderStateConverter : IValueConverter
     {
-
         public object Convert(object value, Type targetType, object parameter,
         CultureInfo culture)
         {

@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
-
 using System.Reflection;
 
-using Csla;
 using Csla.Core.FieldManager;
 using Csla.CustomFieldData;
+
 using Cinch;
-using MEFedMVVM.ViewModelLocator;
+
 using XRMS.Business.Repositories;
 using XRMS.Business.Services;
 

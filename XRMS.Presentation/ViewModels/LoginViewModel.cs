@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Cinch;
-using XRMS.Libraries.BaseClasses;
+
 using XRMS.Libraries.Helpers;
 using XRMS.Libraries.Constants;
-using XRMS.Business;
 using XRMS.Business.Models;
 using XRMS.Business.Services;
-
 using XRMS.Libraries.MVVM;
 
 namespace XRMS.Presentation.ViewModels
@@ -143,7 +138,7 @@ namespace XRMS.Presentation.ViewModels
                                 }
                                 catch (Exception ex)
                                 {
-                                    MessageBoxService.ShowError("Error while read information of user");
+                                    MessageBoxService.ShowError("Error: " + ex.Message + "\nError while read information of user");
                                 }
                             }
                             else

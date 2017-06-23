@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Windows;
 using System.Globalization;
-using System.Windows;
 
 namespace XRMS.Libraries.Helpers
 {

@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel.Composition;
-
-using Csla;
 
 using XRMS.Data.EntityFramework;
 using XRMS.Business.Models;
 using XRMS.Business.Repositories;
-using XRMS.Business.Services;
-
-using XRMS.Business.Repositories.DomainModel;
 using XRMS.Business.UnitOfWorks;
 
 using MEFedMVVM.ViewModelLocator;
-using Cinch;
+
 namespace XRMS.Business.Services
 {
     /// <summary>

@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using XRMS.Libraries.BaseObjects;
-
 using XRMS.Business.Models;
-using XRMS.Business.Repositories;
 
 namespace XRMS.Business.Services
 {
@@ -86,9 +81,10 @@ namespace XRMS.Business.Services
 
     }
 
-    public interface IGlobalDataManager
+    public interface IRestaurantManager : IGenericManager<Restaurant>, IGenericIdBaseObjectManager<Restaurant>
     {
         DateTime GetDbCurrentDatetime();
-        Restaurant ReadRestaurantInfo();
+        //Restaurant ReadRestaurantInfo();
+        //bool UpdateRestaurantInfo(Restaurant item);
     }
 }

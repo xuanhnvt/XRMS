@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:XRMS.Presentation.Views"
         mc:Ignorable="d"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:meffed="http:\\www.codeplex.com\MEFedMVVM"
         xmlns:CinchV2="clr-namespace:Cinch;assembly=Cinch.WPF"
         xmlns:UserControls="clr-namespace:XRMS.Presentation.UserControls"
@@ -78,7 +79,13 @@
                            VerticalAlignment="Center" HorizontalAlignment="Right"/>
                     <Image Source="../Images/Profile.ico"
                            Margin="0,5,5,0" Width="32" Height="32"
-                           Cursor="Hand" ToolTip="User"/>
+                           Cursor="Hand" ToolTip="User">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDown">
+                                <i:InvokeCommandAction Command="{Binding ViewProfileCommand}" CommandParameter="{Binding Path=MainUser}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Image>
                 </StackPanel>
 
                 <Label Grid.Column="2" Grid.Row="1" Grid.RowSpan="2"

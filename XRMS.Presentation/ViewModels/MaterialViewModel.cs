@@ -1,18 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel;
-using System.Windows.Data;
-using System.Windows.Input;
 
 using Cinch;
-using XRMS.Libraries.BaseClasses;
-using XRMS.Libraries.Helpers;
-using XRMS.Business;
+
 using XRMS.Business.Models;
 using XRMS.Business.Services;
-
 using XRMS.Libraries.MVVM;
 
 namespace XRMS.Presentation.ViewModels

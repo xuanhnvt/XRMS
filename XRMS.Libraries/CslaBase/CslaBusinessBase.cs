@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
-using System.Reflection;
 using System.Linq.Expressions;
-//using System.ComponentModel;
-
-using Csla;
-using Csla.Reflection;
-using Csla.CustomFieldData;
 
 namespace XRMS.Libraries.CslaBase
 {

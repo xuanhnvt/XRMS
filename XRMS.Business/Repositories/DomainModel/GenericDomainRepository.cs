@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Csla;
-using Csla.Server;
 
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 
 using XRMS.Business.Repositories.EntityModel;
-using XRMS.Libraries.BaseObjects;
 using XRMS.Libraries.CslaBase;
 
 namespace XRMS.Business.Repositories.DomainModel

@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 using Csla;
-using Csla.Rules.CommonRules;
-using Csla.Serialization;
 
 using XRMS.Libraries.CslaBase;
 using XRMS.Libraries.Constants;

@@ -1,11 +1,11 @@
-﻿<Window x:Class="XRMS.Demo.Popups.RestaurantInfoPopup"
+﻿<Window x:Class="XRMS.Presentation.Popups.RestaurantInfoPopup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:XRMS.Demo.Popups"
+        xmlns:local="clr-namespace:XRMS.Presentation.Popups"
         mc:Ignorable="d"
-        Title="Restaurant Information" Height="400" Width="510"
+        Title="Restaurant Information" Height="550" Width="700"
         Icon="../Images/XRestaurant.png"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner">
@@ -38,78 +38,163 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-              Background="Black">
-
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="2"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" Margin="10,0,0,0" VerticalAlignment="Stretch">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"
+                        Background="{DynamicResource PageHeaderPanelBackgroundBrush}">
                 <Image Source="../Images/Customers.png" 
                        Width="36" Height="36"
+                       Margin="10,0,0,0"
                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{Binding DisplayName}"
-                       HorizontalAlignment="Left" VerticalAlignment="Center"
-                       FontWeight="Bold" Foreground="Orange" FontSize="18"/>
+                       Margin="10,0,0,0"
+                       Style="{DynamicResource LabelPageHeaderStyle}"/>
             </StackPanel>
 
-            <Rectangle Grid.Row="1"
+            <!--Rectangle Grid.Row="1"
                        Height="2"
                        HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-                       Fill="Black"/>
+                       Fill="Black"/-->
         </Grid>
-        <Grid Grid.Row="1" Margin="20" IsEnabled="{Binding IsEditMode}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="35"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="105"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Text="Name:" Grid.Row="0" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,5,0" TextAlignment="Right" FontSize="12" FontWeight="Bold"/>
-            <TextBlock Text="Phone Number 1:" Grid.Row="1" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,5,0" TextAlignment="Right" FontSize="12" FontWeight="Bold"/>
-            <TextBlock Text="Phone Number 2:" Grid.Row="2" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,5,0" TextAlignment="Right" FontSize="12" FontWeight="Bold"/>
-            <TextBlock Text="Website:" Grid.Row="3" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,5,0" TextAlignment="Right" FontSize="12" FontWeight="Bold"/>
-            <TextBlock Text="Email:" Grid.Row="4" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,5,0" TextAlignment="Right" FontSize="12" FontWeight="Bold"/>
-            <TextBlock Text="Address:" Grid.Row="5" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="0,0,5,0" TextAlignment="Right" FontSize="12" FontWeight="Bold"/>
+        <GroupBox Grid.Row="1" Margin="20,0,20,5" Width="Auto" Height="Auto">
+            <GroupBox.Header>
+                <Label Content="Restaurant"/>
+            </GroupBox.Header>
 
+            <Grid Margin="10,10,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="6"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
 
-            <TextBox Text="{Binding CurrentRestaurant.Name}" Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,150,0" MaxLength="100" MaxLines="2" />
-            <TextBox Text="{Binding CurrentRestaurant.PhoneNumber1}" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,150,0" MaxLength="11" MaxLines="1" />
-            <TextBox Text="{Binding CurrentRestaurant.PhoneNumber2}" Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,150,0" MaxLength="11" MaxLines="1" />
-            <TextBox Text="{Binding CurrentRestaurant.Website}" Grid.Row="3" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,150,0" MaxLength="50" MaxLines="2" />
-            <TextBox Text="{Binding CurrentRestaurant.Email}" Grid.Row="4" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Margin="0,0,150,0" MaxLength="50" MaxLines="2" />
-            <TextBox Text="{Binding CurrentRestaurant.Address}" Grid.Row="5" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="0,0,20,0" MaxLength="200" MaxLines="2" />
-            <Button Content="Browse Logo" Template="{StaticResource GlassButton}" Command="{Binding BrowseLogoCommand}" Grid.Column="1" Grid.Row="4" Margin="0,0,35,0" HorizontalAlignment="Right" VerticalAlignment="Center" Width="90" Height="30" />
-            <Border Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="0,0,30,5" Width="100" Height="100" HorizontalAlignment="Right" VerticalAlignment="Stretch" Background="#CCFFFFFF" BorderBrush="#FF975E5E" BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
-                <Image Source="{Binding CurrentRestaurant.Logo}" x:Name="imgLogo" Margin="4,4,4,4" Width="Auto" Height="Auto"/>
-            </Border>
-        </Grid>
+                <!-- Name -->
+                <Label Grid.Row="0" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Name: "/>
+                <TextBox Grid.Row="0" Grid.Column="2"
+                         x:Name="NameBox"
+                         Text="{Binding Path=Item.Name, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="{Binding ElementName=NameBox, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+
+                <!-- Phone Number 1 -->
+                <Label Grid.Row="2" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Phone Number 1: "/>
+                <TextBox Grid.Row="2" Grid.Column="2"
+                         x:Name="PhoneNumber1Box"
+                         Text="{Binding Path=Item.PhoneNumber1, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="{Binding ElementName=PhoneNumber1Box, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+
+                <!-- Phone Number 2 -->
+                <Label Grid.Row="4" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Phone Number 2: "/>
+                <TextBox Grid.Row="4" Grid.Column="2"
+                         x:Name="PhoneNumber2Box"
+                         Text="{Binding Path=Item.PhoneNumber2, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="{Binding ElementName=PhoneNumber2Box, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+
+                <!-- Website -->
+                <Label Grid.Row="6" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Website: "/>
+                <TextBox Grid.Row="6" Grid.Column="2"
+                         x:Name="WebsiteBox"
+                         Text="{Binding Path=Item.Website, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="{Binding ElementName=WebsiteBox, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+
+                <!-- Email -->
+                <Label Grid.Row="8" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Email: "/>
+                <TextBox Grid.Row="8" Grid.Column="2"
+                         x:Name="EmailBox"
+                         Text="{Binding Path=Item.Email, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3"
+                           Text="{Binding ElementName=EmailBox, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+
+                <!-- Address -->
+                <Label Grid.Row="10" Grid.Column="0"
+                       HorizontalAlignment="Right"
+                       Content="Address: "/>
+                <TextBox Grid.Row="10" Grid.Column="2" Grid.ColumnSpan="2"
+                         x:Name="AddressBox"
+                         Text="{Binding Path=Item.Address, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" 
+                         Validation.ErrorTemplate="{x:Null}" />
+                <TextBlock Grid.Row="11" Grid.Column="0" Grid.ColumnSpan="4"
+                           Text="{Binding ElementName=AddressBox, Path=(Validation.Errors).CurrentItem.ErrorContent}"
+                           Style="{DynamicResource TextValidationErrorStyle}"
+                           VerticalAlignment="Top" />
+                <Button Content="Browse Logo" Grid.Column="3" Grid.Row="7"
+                    Width="90" Height="30"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Command="{Binding BrowseLogoCommand}"/>
+                <Border Grid.Column="3" Grid.Row="1" Grid.RowSpan="6"
+                    Width="160" Height="160"
+                    HorizontalAlignment="Center" VerticalAlignment="Top"
+                    Background="#CCFFFFFF" BorderBrush="#FF975E5E"
+                    BorderThickness="1,1,1,1" CornerRadius="10,10,10,10">
+                    <Image Source="{Binding Item.Logo}" x:Name="imgLogo"
+                       Margin="4,4,4,4"
+                       Width="Auto"
+                       Height="Auto"/>
+                </Border>
+            </Grid>
+        </GroupBox>
         <StackPanel Grid.Row="2" Orientation="Horizontal"
-                                VerticalAlignment="Top" HorizontalAlignment="Center">
-            <Button Content="Edit" Template="{StaticResource GlassButton}"
-                                Margin="0,5,0,5" Width="90" Height="30"
-                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Command="{Binding EditCommand}"/>
-            <Button Content="Save" Template="{StaticResource GlassButton}"
-                                Margin="10,5,0,5" Width="90" Height="30"
-                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Command="{Binding SaveCommand}"/>
-            <Button Content="Cancel" Template="{StaticResource GlassButton}"
-                                Margin="10,5,0,5" Width="90" Height="30"
-                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Command="{Binding CancelCommand}"/>
+                    VerticalAlignment="Top" HorizontalAlignment="Center">
+            <Button Content="Edit"
+                    Margin="0,5,0,5" Width="90" Height="30"
+                    Command="{Binding EditCommand}"/>
+            <Button Content="Save"
+                    Margin="10,5,0,5" Width="90" Height="30"
+                    Command="{Binding SaveCommand}"/>
+            <Button Content="Cancel"
+                    Margin="10,5,0,5" Width="90" Height="30"
+                    Command="{Binding CancelCommand}"/>
         </StackPanel>
     </Grid>
 </Window>

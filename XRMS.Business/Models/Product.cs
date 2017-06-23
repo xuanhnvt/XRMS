@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using System.Collections.ObjectModel;
 
 using Csla;
-using Csla.Rules.CommonRules;
-using Csla.Serialization;
-
-using Cinch;
 using XRMS.Libraries.BaseObjects;
 
 namespace XRMS.Business.Models
@@ -22,7 +13,7 @@ namespace XRMS.Business.Models
 
         //BitmapImage _image;
 
-        ObservableCollection<RecipeItem> _recipes;
+        //ObservableCollection<RecipeItem> _recipes;
 
         #endregion // Private Data Members
 

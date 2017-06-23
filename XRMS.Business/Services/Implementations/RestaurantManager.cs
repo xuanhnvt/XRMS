@@ -13,41 +13,56 @@ using MEFedMVVM.ViewModelLocator;
 namespace XRMS.Business.Services
 {
     /// <summary>
-    /// This class implements the IUnitManager for WPF purposes.
+    /// This class implements the IUserManager for WPF purposes.
     /// </summary>
     [PartCreationPolicy(CreationPolicy.Shared)]
-    [ExportService(ServiceType.Runtime, typeof(IUnitManager))]
-    public class UnitManager : GenericIdBaseObjectManager<Unit>, IUnitManager
+    [ExportService(ServiceType.Runtime, typeof(IRestaurantManager))]
+    public class RestaurantManager : GenericIdBaseObjectManager<Restaurant>, IRestaurantManager
     {
         private UnitOfWork _uow;
-        //private IRepositoryProvider _provider = new RepositoryProvider(RepositoryFactories.Instance());
 
-        public UnitManager()
+        public RestaurantManager()
         {
             //_uow = new UnitOfWork(new RepositoryProvider(RepositoryFactories.Instance()));
         }
 
-        public override Unit GetByKey(Unit itemWithKeys)
+        public DateTime GetDbCurrentDatetime()
         {
-            return (this as IUnitManager).GetById(itemWithKeys.Id);
+            DateTime currentDatetime = DateTime.Now;
+            try
+            {
+                using (XRMSEntities context = new XRMSEntities())
+                {
+                    _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
+                    currentDatetime = _uow.GetDbCurrentDatetime();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
+            }
+            return currentDatetime;
         }
 
-        public override List<Unit> GetList()
+        public override Restaurant GetByKey(Restaurant itemWithKeys)
         {
-            List<Unit> list = null;
+            return (this as IRestaurantManager).GetById(itemWithKeys.Id);
+        }
+
+        public override List<Restaurant> GetList()
+        {
+            List<Restaurant> list = null;
 
             try
             {
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    list = _uow.UnitRepository.GetAll().ToList();
+                    list = _uow.RestaurantRepository.GetAll().ToList();
                     if (list != null)
                     {
-                        foreach (Unit item in list)
-                        {
+                        foreach (Restaurant item in list)
                             item.MarkOld();
-                        }
                     }
                 }
             }
@@ -59,7 +74,7 @@ namespace XRMS.Business.Services
         }
 
 
-        public override bool Create(Unit item)
+        public override bool Create(Restaurant item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -70,7 +85,7 @@ namespace XRMS.Business.Services
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    _uow.UnitRepository.Add(item);
+                    _uow.RestaurantRepository.Add(item);
                     _uow.SaveChanges();
                     result = true;
                 }
@@ -82,7 +97,7 @@ namespace XRMS.Business.Services
             return result;
         }
 
-        public override bool Update(Unit item)
+        public override bool Update(Restaurant item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -93,7 +108,7 @@ namespace XRMS.Business.Services
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    _uow.UnitRepository.Update(item);
+                    _uow.RestaurantRepository.Update(item);
                     _uow.SaveChanges();
                     result = true;
                 }
@@ -105,7 +120,7 @@ namespace XRMS.Business.Services
             return result;
         }
 
-        public override bool Delete(Unit item)
+        public override bool Delete(Restaurant item)
         {
             if (item == null)
                 throw new ArgumentNullException("item");
@@ -116,7 +131,7 @@ namespace XRMS.Business.Services
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    _uow.UnitRepository.Remove(item);
+                    _uow.RestaurantRepository.Remove(item);
                     _uow.SaveChanges();
                     result = true;
                 }
@@ -128,15 +143,15 @@ namespace XRMS.Business.Services
             return result;
         }
 
-        public Unit GetById(int id)
+        public Restaurant GetById(int id)
         {
-            Unit item = null;
+            Restaurant item = null;
             try
             {
                 using (XRMSEntities context = new XRMSEntities())
                 {
                     _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
-                    item = _uow.UnitRepository.GetById(id);
+                    item = _uow.RestaurantRepository.GetById(id);
                     if (item != null)
                     {
                         item.MarkOld();
@@ -149,5 +164,46 @@ namespace XRMS.Business.Services
             }
             return item;
         }
+
+        /*public Restaurant ReadRestaurantInfo()
+        {
+            Restaurant result = null;
+            try
+            {
+                using (XRMSEntities context = new XRMSEntities())
+                {
+                    _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
+                    result = _uow.RestaurantRepository.GetById(1);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
+            }
+            return result;
+        }
+
+        public bool UpdateRestaurantInfo(Restaurant item)
+        {
+            if (item == null)
+                throw new ArgumentNullException("item");
+
+            bool result = false;
+            try
+            {
+                using (XRMSEntities context = new XRMSEntities())
+                {
+                    _uow = new UnitOfWork(context, new RepositoryProvider(RepositoryFactories.Instance()));
+                    _uow.RestaurantRepository.Update(item);
+                    _uow.SaveChanges();
+                    result = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
+            }
+            return result;
+        }*/
     }
 }

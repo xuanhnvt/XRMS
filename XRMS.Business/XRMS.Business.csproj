@@ -116,7 +116,7 @@
     <Compile Include="Repositories\IRepositoryProvider.cs" />
     <Compile Include="Repositories\ObjectMappingHelper.cs" />
     <Compile Include="Services\Implementations\AreaManager.cs" />
-    <Compile Include="Services\Implementations\GlobalDataManager.cs" />
+    <Compile Include="Services\Implementations\RestaurantManager.cs" />
     <Compile Include="Services\Implementations\MaterialGroupManager.cs" />
     <Compile Include="Services\Implementations\MaterialManager.cs" />
     <Compile Include="Services\Implementations\OrderItemManger.cs" />

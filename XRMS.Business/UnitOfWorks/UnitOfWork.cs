@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 
 using XRMS.Data.EntityFramework;
 using XRMS.Business.Repositories;
 using XRMS.Business.Repositories.DomainModel;
-/*using XRMS.Business.Repositories.DomainModel.FromEF;
-using XRMS.Business.Models;*/
 
 namespace XRMS.Business.UnitOfWorks
 {

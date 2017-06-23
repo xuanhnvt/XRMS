@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Drawing.Printing;
 using System.Collections.ObjectModel;
 
 using Cinch;
-using XRMS.Libraries.BaseClasses;
-using XRMS.Libraries.Helpers;
+
 using XRMS.Libraries.MVVM;
 
 namespace XRMS.Presentation.ViewModels

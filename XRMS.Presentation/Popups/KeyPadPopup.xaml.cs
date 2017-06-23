@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 using Cinch;
 using XRMS.Presentation.ViewModels;
@@ -46,7 +36,7 @@ namespace XRMS.Presentation.Popups
             }
             catch (Exception ex)
             {
-                MessageBox.Show("You entered wrong decimal number");
+                MessageBox.Show("Error: " + ex.Message + "\nYou entered wrong decimal number");
             }
         }
 
@@ -68,7 +58,7 @@ namespace XRMS.Presentation.Popups
             }
             catch (Exception ex)
             {
-                MessageBox.Show("You entered wrong decimal number");
+                MessageBox.Show("Error: " + ex.Message + "\nYou entered wrong decimal number");
             }
         }
 

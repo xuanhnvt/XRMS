@@ -1,23 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Input;
-
 using System.ComponentModel.Composition;
+
 using MEFedMVVM.ViewModelLocator;
 
-//using DeepEqual;
-//using DeepEqual.Syntax;
-
 using Cinch;
-using XRMS.Business;
+
 using XRMS.Business.Models;
 using XRMS.Business.Services;
-using XRMS.Libraries.BaseClasses;
-using XRMS.Libraries.Helpers;
 using XRMS.Libraries.MVVM;
-
 
 namespace XRMS.Presentation.ViewModels
 {

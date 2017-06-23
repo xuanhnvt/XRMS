@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
+﻿using AutoMapper;
 
-using AutoMapper;
 using XRMS.Data.EntityFramework;
 using XRMS.Business.Models;
-using XRMS.Libraries.BaseObjects;
 
 namespace XRMS.Business.Repositories
 {

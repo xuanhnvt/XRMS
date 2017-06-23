@@ -120,6 +120,9 @@
     <Compile Include="Popups\ProductPopup.xaml.cs">
       <DependentUpon>ProductPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Popups\RestaurantInfoPopup.xaml.cs">
+      <DependentUpon>RestaurantInfoPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Popups\TablePopup.xaml.cs">
       <DependentUpon>TablePopup.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,7 @@
     <Compile Include="ViewModels\ProductViewModel.cs" />
     <Compile Include="ViewModels\ProductsManagementViewModel.cs" />
     <Compile Include="ViewModels\RecipeItemListViewModel.cs" />
+    <Compile Include="ViewModels\RestaurantInfoViewModel.cs" />
     <Compile Include="ViewModels\TableListViewModel.cs" />
     <Compile Include="ViewModels\UnitListViewModel.cs" />
     <Compile Include="ViewModels\UnitViewModel.cs" />
@@ -219,6 +223,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Popups\ProductPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Popups\RestaurantInfoPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

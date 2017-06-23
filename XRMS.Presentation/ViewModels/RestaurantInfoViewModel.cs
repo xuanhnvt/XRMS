@@ -8,36 +8,34 @@ using XRMS.Libraries.MVVM;
 
 namespace XRMS.Presentation.ViewModels
 {
-    public class MaterialGroupViewModel : ItemViewModelBase<MaterialGroup>
+    public class RestaurantInfoViewModel : ItemViewModelBase<Restaurant>
     {
         #region Private Data Members
-
-        //services
-        //private IMaterialGroupManager _manager = null;
 
         #endregion // Private Data Members
 
         #region Constructors
 
-        public MaterialGroupViewModel(IMessageBoxService messageBoxService, IMaterialGroupManager manager) : base(messageBoxService, manager)
+        public RestaurantInfoViewModel(IMessageBoxService messageBoxService, IRestaurantManager manager) : base(messageBoxService, manager)
         {
             // do initialization
             try
             {
-                this.DisplayName = "Create Material Group";
+                this.DisplayName = "Create Restaurant";
             }
             catch (Exception ex)
             {
                 this.MessageBoxService.ShowError(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
             }
+
         }
 
-        public MaterialGroupViewModel(IMessageBoxService messageBoxService, MaterialGroup item, IMaterialGroupManager manager) : base(messageBoxService, item, manager)
+        public RestaurantInfoViewModel(IMessageBoxService messageBoxService, Restaurant area, IRestaurantManager manager) : base(messageBoxService, area, manager)
         {
             // do initialization
             try
             {
-                this.DisplayName = "Edit Material Group: " + this.Item.Name;
+                this.DisplayName = "Edit Restaurant: " + this.Item.Name;
             }
             catch (Exception ex)
             {
@@ -45,6 +43,7 @@ namespace XRMS.Presentation.ViewModels
             }
         }
         #endregion // Constructors
+
 
         #region Public Properties
 
@@ -74,6 +73,7 @@ namespace XRMS.Presentation.ViewModels
         }*/
 
         #endregion // IDataErrorInfo Members
+
 
         #region Command Properties
 

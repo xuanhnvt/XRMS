@@ -1,27 +1,18 @@
 ﻿using System;
-using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-
 using System.ComponentModel.Composition;
-using System.Configuration;
-using System.Diagnostics;
 using System.ComponentModel;
 using System.Collections.Generic;
 
 using MEFedMVVM.ViewModelLocator;
-using Cinch;
 using MEFedMVVM.Common;
+
+using Cinch;
 
 using XRMS.Business.Models;
 using XRMS.Business.Services;
+using XRMS.Libraries.MVVM;
 
 namespace XRMS.Presentation.ViewModels
 {
@@ -37,13 +28,34 @@ namespace XRMS.Presentation.ViewModels
         #region Data
         private bool showContextMenu = false;
         private IViewAwareStatus viewAwareStatusService;
-        private IMessageBoxService messageBoxService;
 
         private DispatcherTimer _refreshingTimer;
         private int _clockCounter = 0;
 
-        private IGlobalDataManager _globalDataManager = new GlobalDataManager();
+        private IRestaurantManager _restaurantManager = new RestaurantManager();
         #endregion
+
+        #region Public properties
+
+        /// <summary>
+        /// Gets or sets message box service in order to show message to user
+        /// </summary>
+        public IMessageBoxService MessageBoxService { get; set; }
+
+        /// <summary>
+        /// Gets or sets UI service in order to call Popup Window
+        /// </summary>
+        public IUIVisualizerService UIVisualizerService { get; set; }
+
+        #endregion
+
+        #region Command Properties
+        /// <summary>
+        /// Gets or sets the login command.
+        /// </summary>
+        public CommandBase<User> ViewProfileCommand { get; set; }
+
+        #endregion // ICommand Properties
 
         #region Ctor
         [ImportingConstructor]
@@ -51,8 +63,12 @@ namespace XRMS.Presentation.ViewModels
         {
             this.viewAwareStatusService = viewAwareStatusService;
             this.viewAwareStatusService.ViewLoaded += ViewAwareStatusService_ViewLoaded;
-            this.messageBoxService = messageBoxService;
+            this.MessageBoxService = messageBoxService;
+            this.UIVisualizerService = ViewModelRepository.Instance.Resolver.Container.GetExport<IUIVisualizerService>().Value;
             this.DisplayName = "Main Window";
+
+
+            this.ViewProfileCommand = new CommandBase<User>(o => this.ExecuteViewProfileCommand(o));
 
             if (Designer.IsInDesignMode)
                 return;
@@ -69,6 +85,27 @@ namespace XRMS.Presentation.ViewModels
             _refreshingTimer.Start();
 
             ReadRestaurantInfo();
+        }
+
+        private void ExecuteViewProfileCommand(User item)
+        {
+            try
+            {
+                if (item == null)
+                {
+                    throw new ArgumentNullException("item");
+                }
+                UserViewModel userViewModel = new UserViewModel(this.MessageBoxService, item, (IUserManager)new UserManager(), new UserRoleManager());
+
+                // open dialog and return result when it is closed
+                bool? result = this.UIVisualizerService.ShowDialog("UserPopup", userViewModel);
+
+                // code to check result
+            }
+            catch (Exception ex)
+            {
+                this.MessageBoxService.ShowError(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
+            }
         }
         #endregion
 
@@ -160,7 +197,7 @@ namespace XRMS.Presentation.ViewModels
             var miExit = new CinchMenuItem("Exit") { IconUrl = @"/XRMS.Presentation;component/Images/Exit.png" };
             miExit.Command = new SimpleCommand<object, object>((x) =>
             {
-                if (messageBoxService.ShowYesNo(
+                if (MessageBoxService.ShowYesNo(
                 "Would you like to exit application",
                 CustomDialogIcons.Question) == CustomDialogResults.Yes)
                 {
@@ -177,6 +214,29 @@ namespace XRMS.Presentation.ViewModels
             {
                 case Role.Manager:
                     {
+                        CinchMenuItem miInfo = new CinchMenuItem("Restaurant Info");
+                        miInfo.IconUrl = @"/XRMS.Presentation;component/Images/About.ico";
+                        miInfo.Command = new SimpleCommand<object, object>((x) =>
+                        {
+                            try
+                            {
+                                if (RestaurantInfo == null)
+                                    throw new ArgumentNullException("RestaurantInfo");
+
+                                RestaurantInfoViewModel restaurantViewModel = new RestaurantInfoViewModel(this.MessageBoxService, RestaurantInfo, (IRestaurantManager)_restaurantManager);
+
+                                // open dialog and return result when it is closed
+                                bool? result = this.UIVisualizerService.ShowDialog("RestaurantInfoPopup", restaurantViewModel);
+
+                                // code to check result
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
+                        });
+                        miManagement.Children.Add(miInfo);
+
                         CinchMenuItem miUsers = new CinchMenuItem("Users");
                         miUsers.Command = new SimpleCommand<object, object>((x) =>
                         {
@@ -343,7 +403,7 @@ namespace XRMS.Presentation.ViewModels
             if (Designer.IsInDesignMode)
                 return;
 
-            //this.messageBoxService.ShowInformation("ViewAwareStatusService_ViewLoaded123");
+            //this.MessageBoxService.ShowInformation("ViewAwareStatusService_ViewLoaded123");
 
             /*_refreshingTimer.Start();
             ReadRestaurantInfo();
@@ -357,14 +417,14 @@ namespace XRMS.Presentation.ViewModels
                     "TablesManagementView", null, "Tables Management", true);
             Views.Add(workspace);
             SetActiveWorkspace(workspace);*/
-            //this.messageBoxService.ShowInformation("ViewAwareStatusService_ViewLoaded");
+            //this.MessageBoxService.ShowInformation("ViewAwareStatusService_ViewLoaded");
         }
 
         private void ImageWorkSpace_WorkspaceTabClosing(object sender, CancelEventArgs e)
         {
             e.Cancel = false;
             CustomDialogResults result =
-                messageBoxService.ShowYesNo("Are you sure you want to close this tab?",
+                MessageBoxService.ShowYesNo("Are you sure you want to close this tab?",
                     CustomDialogIcons.Question);
 
             //if user did not want to cancel, keep workspace open
@@ -384,12 +444,12 @@ namespace XRMS.Presentation.ViewModels
         {
             try
             {
-                GlobalObjects.CurrentDateTime = _globalDataManager.GetDbCurrentDatetime();
+                GlobalObjects.CurrentDateTime = _restaurantManager.GetDbCurrentDatetime();
                 Clock = GlobalObjects.CurrentDateTime.ToString();
             }
             catch (Exception ex)
             {
-                this.messageBoxService.ShowError(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
+                this.MessageBoxService.ShowError(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
             }
 
             // refresh data every 5 seconds
@@ -406,11 +466,11 @@ namespace XRMS.Presentation.ViewModels
         {
             try
             {
-                RestaurantInfo = _globalDataManager.ReadRestaurantInfo();
+                RestaurantInfo = _restaurantManager.GetById(1);
             }
             catch (Exception ex)
             {
-                this.messageBoxService.ShowError(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
+                this.MessageBoxService.ShowError(this.GetType().FullName + System.Reflection.MethodBase.GetCurrentMethod().Name + ": " + ex.Message);
             }
         }
 

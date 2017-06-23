@@ -1,16 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-//using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.ComponentModel.DataAnnotations;
 
 using Csla;
-using Csla.Rules.CommonRules;
-using Csla.Serialization;
 
 using XRMS.Libraries.BaseObjects;
 
