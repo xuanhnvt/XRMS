@@ -51,9 +51,9 @@
 
             <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Stretch"
                         Background="{DynamicResource PageHeaderPanelBackgroundBrush}">
-                <Image Source="../Images/Printer.ico" 
+                <Image Source="../Images/Printer.png" 
                        Margin="10,0,0,0"
-                       Width="36" Height="36"
+                       Width="48" Height="48"
                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{Binding DisplayName}"
                        Margin="10,0,0,0"

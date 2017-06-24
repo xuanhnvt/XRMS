@@ -50,8 +50,8 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"
                         Background="{DynamicResource PageHeaderPanelBackgroundBrush}">
-                <Image Source="../Images/Customers.png" 
-                       Width="36" Height="36"
+                <Image Source="../Images/RestaurantInfo.png"
+                       Width="48" Height="48"
                        Margin="10,0,0,0"
                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{Binding DisplayName}"

@@ -34,6 +34,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Cinch.WPF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -144,6 +145,7 @@
     </Compile>
     <Compile Include="UserControls\TabControlEx.cs" />
     <Compile Include="ValueConverters\InverseBooleanConverter.cs" />
+    <Compile Include="ValueConverters\MenuIconConverter.cs" />
     <Compile Include="ValueConverters\OrderItemStateConverter.cs" />
     <Compile Include="ValueConverters\OrderItemStateToStringConverter.cs" />
     <Compile Include="ValueConverters\OrderStateConverter.cs" />
@@ -355,7 +357,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportReceipt.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Images\Banner4.pdn" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -449,6 +450,63 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Customers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\About.ico" />
+    <Resource Include="Images\Add.png" />
+    <Resource Include="Images\Banner.jpg" />
+    <Resource Include="Images\CanceledOrder.ico" />
+    <Resource Include="Images\Delete.png" />
+    <Resource Include="Images\Editting.ico" />
+    <Resource Include="Images\Email.png" />
+    <Resource Include="Images\Exit.ico" />
+    <Resource Include="Images\go.png" />
+    <Resource Include="Images\House.png" />
+    <Resource Include="Images\kitchen-08-512.png" />
+    <Resource Include="Images\Mobile.png" />
+    <Resource Include="Images\Name.png" />
+    <Resource Include="Images\Orders.png" />
+    <Resource Include="Images\Refresh.ico" />
+    <Resource Include="Images\Report.ico" />
+    <Resource Include="Images\Search.png" />
+    <Resource Include="Images\select_code-512.png" />
+    <Resource Include="Images\Setting.ico" />
+    <Resource Include="Images\Unknown.ico" />
+    <Resource Include="Images\User.ico" />
+    <Resource Include="Images\XRestaurant_old.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RestaurantInfo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\User.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Material.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Cashier.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Kitchen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Group.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Unit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Product.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

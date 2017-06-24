@@ -14,7 +14,7 @@
     <ValueConverters:TableStateConverter x:Key="TableStateConverter"/>
     <ValueConverters:ProductEditionTypeConverter x:Key="ProductEditionTypeConverter"/>
     <ValueConverters:OrderItemStateToStringConverter x:Key="OrderItemStateToStringConverter"/>
-    <!--ValueConverters:MenuIconConverter x:Key="MenuIconConv" /-->
+    <ValueConverters:MenuIconConverter x:Key="MenuIconConverter"/>
     <!--ValueConverters:BoolToYesNoAnswerConverter x:Key="BoolToYesNoAnswerConverter" /-->
 
     <!-- OrderColumnTemplate -->

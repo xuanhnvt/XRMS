@@ -28,10 +28,10 @@
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Stretch"
                         Background="{DynamicResource PageHeaderPanelBackgroundBrush}">
-                <!--Image Source="../Images/Area.png"
+                <Image Source="../Images/Area.png"
                        Margin="10,0,0,0"
-                       Width="36" Height="36"
-                       HorizontalAlignment="Left" VerticalAlignment="Center"/-->
+                       Width="48" Height="48"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{Binding DisplayName}"
                        Margin="10,0,0,0"
                        Style="{DynamicResource LabelPageHeaderStyle}"/>

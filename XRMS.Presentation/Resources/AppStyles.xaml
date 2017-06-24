@@ -471,6 +471,7 @@
         <Setter Property="MenuItem.Header" Value="{Binding Text}"/>
         <Setter Property="MenuItem.ItemsSource" Value="{Binding Children}"/>
         <Setter Property="MenuItem.Command" Value="{Binding Command}" />
+        <Setter Property="MenuItem.Icon" Value="{Binding IconUrl, Converter={StaticResource MenuIconConverter}}" />
     </Style>
 
 

@@ -94,7 +94,7 @@
                         VerticalAlignment="Stretch"
                         Background="{DynamicResource PageHeaderPanelBackgroundBrush}">
                 <Image Source="../Images/Table.png" 
-                       Width="36" Height="36"
+                       Width="48" Height="48"
                        Margin="10,0,0,0"
                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <Label Content="{Binding DisplayName}"
