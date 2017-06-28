@@ -110,12 +110,12 @@ namespace XRMS.Business.Models
         /// <value>
         /// The restaurant logo.
         /// </value>
-        public BitmapImage Logo
+        /*public BitmapImage Logo
         {
             get { return GetProperty(LogoProperty); }
             set { SetProperty(LogoProperty, value); }
         }
-        public static readonly PropertyInfo<BitmapImage> LogoProperty = RegisterProperty<BitmapImage>(p => p.Logo);
+        public static readonly PropertyInfo<BitmapImage> LogoProperty = RegisterProperty<BitmapImage>(p => p.Logo);*/
 
 
         /// <summary>

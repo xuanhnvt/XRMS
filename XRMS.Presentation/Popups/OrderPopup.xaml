@@ -10,7 +10,7 @@
         xmlns:UserControls="clr-namespace:XRMS.Presentation.UserControls"
         xmlns:DependencyProperties="clr-namespace:XRMS.Presentation.DependencyProperties"
         WindowStartupLocation="CenterOwner"
-        Title="Product View" Height="Auto" Width="1000"
+        Title="Order View" Height="Auto" Width="1000"
         Background="{DynamicResource PageBackgroundBrush}"
         Foreground="{DynamicResource PageForegroundBrush}"
         ResizeMode="NoResize">
@@ -20,6 +20,23 @@
                 <!--Image Source="../Images/Editting.ico" VerticalAlignment="Center" Margin="0,0,0,0" Width="14" Height="14" Visibility="{Binding IsEditting, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=true, Mode=OneWay}"/-->
                 <TextBlock Text="*" HorizontalAlignment="Center" VerticalAlignment="Stretch" TextAlignment="Center" Visibility="{Binding IsDirty, Converter={StaticResource BoolToVisibilityConv}, ConverterParameter=true, Mode=OneWay}"/>
             </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="UpdatedQuantityColumnTemplate">
+
+            <TextBox x:Name="txbUpdatedQuantity" Text="{Binding Path=Quantity, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Style="{StaticResource TextBoxCell}"
+                     Width="40" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <!-- This binding is not work, check later -->
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <i:InvokeCommandAction Command="{Binding UpdateQuantityCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+        </DataTemplate>
+        <DataTemplate x:Key="EdittedQuantityColumnTemplate">
+            <TextBox x:Name="txbEdittedQuantity" Text="{Binding Path=EdittedQuantity, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Style="{StaticResource TextBoxCell}"
+                     Width="40" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </DataTemplate>
     </Window.Resources>
     <Grid>
@@ -208,9 +225,9 @@
                                 <GridViewColumn Header="Current Quantity" Width="100"
                                                 DisplayMemberBinding="{Binding Path=OldQuantity}"/>
                                 <GridViewColumn Header="Editted" Width="55"
-                                                DisplayMemberBinding="{Binding Path=EdittedQuantity}"/>
+                                                CellTemplate="{StaticResource EdittedQuantityColumnTemplate}"/>
                                 <GridViewColumn Header="Updated Quantity" Width="105"
-                                                DisplayMemberBinding="{Binding Path=Quantity}"/>
+                                                CellTemplate="{StaticResource UpdatedQuantityColumnTemplate}"/>
                                 <GridViewColumn Header="State"
                                                 DisplayMemberBinding="{Binding Path=State}"
                                                 Width="80"/>

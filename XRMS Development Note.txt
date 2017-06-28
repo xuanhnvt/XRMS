@@ -26,3 +26,16 @@ the operation
 21. xaml designer need connection string of ef
 22. Change view of screen for kitchen.
 23. Can not show popup in mainwindow.
+24. Review Software:
+- Add icon for tab header of each view.
+- OrderView:
+	+ disable Save button if users don't select table or no have any order item or all order items are cancelled
+	or one of order item has quantity < 0. Create validation textbox of column Updated Quantity.
+	+ Add editbox for column: Edited and Updated Quantity.
+	+ Add button Serve
+	+ Refresh OrderItem list every 5s (get message from MainWindow), check state of each item: if it has just been change
+	by kitchen, devide editting item to old quantity and add new item.
+	+ Just can modify OrderItem with state Ordered.
+- Order Model: add business rule, table it must be greater 0.
+- OrderItem Model: add business rule quantity must be greater 0.
+- Check which property need to be managed by framework csla.

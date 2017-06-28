@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 using Csla;
 using Csla.Rules.CommonRules;
@@ -11,6 +12,8 @@ namespace XRMS.Libraries.BaseObjects
         /// <summary>
         /// Gets or sets the object code.
         /// </summary>
+        //[Required(ErrorMessage = "Please input Code")]
+        //[MaxLength(10, ErrorMessage ="Code length must be equal or less than 10")]
         public string Code
         {
             get { return GetProperty(CodeProperty); }

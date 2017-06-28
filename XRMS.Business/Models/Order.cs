@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 using Csla;
 
@@ -27,7 +28,7 @@ namespace XRMS.Business.Models
             this.CheckoutDatetime = Convert.ToDateTime(DateTimeFormats.YMDHMS_NULLDATE);
         }
 
-        #endregion
+        #endregion // Constructors
 
         #region Public Properties
 
@@ -553,7 +554,37 @@ namespace XRMS.Business.Models
         }
         public static readonly PropertyInfo<long> ReportCounterProperty = RegisterProperty<long>(p => p.ReportCounter);
 
-        #endregion
+        #endregion // Public Properties
+
+        #region Overriden Properties
+
+        /// <summary>
+        /// Check if object is valid or not.
+        /// </summary>
+        public override bool IsValid
+        {
+            get
+            {
+                return base.IsValid && this.OrderItems.Count > 0;
+            }
+        }
+
+        #endregion // Overriden Properties
+
+        #region Overriden Methods
+
+        /// <summary>
+        /// Add busisness rules.
+        /// </summary>
+        protected override void AddBusinessRules()
+        {
+            base.AddBusinessRules();
+            //BusinessRules.AddRule(new Required(CodeProperty));
+            //BusinessRules.AddRule(new MaxLength(CodeProperty, 10));
+        }
+
+        #endregion // Overriden Methods
+
 
         #region Public Methods
         public void AddOrderItem(OrderItem item)

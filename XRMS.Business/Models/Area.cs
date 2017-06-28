@@ -28,7 +28,6 @@ namespace XRMS.Business.Models
         /// <summary>
         /// Gets or sets the description.
         /// </summary>
-        [Required(ErrorMessage = "Please input Description")]
         public string Description
         {
             get { return GetProperty(DescriptionProperty); }

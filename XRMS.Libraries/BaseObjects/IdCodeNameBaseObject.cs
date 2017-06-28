@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 using Csla;
 using Csla.Rules.CommonRules;
@@ -11,6 +12,7 @@ namespace XRMS.Libraries.BaseObjects
         /// <summary>
         /// Gets or sets the object name.
         /// </summary>
+        //[Required(ErrorMessage = "Please input Name")]
         public string Name
         {
             get { return GetProperty(NameProperty); }
